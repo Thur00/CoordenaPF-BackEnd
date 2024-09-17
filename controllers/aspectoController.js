@@ -1,5 +1,5 @@
 //clienteController.js
-const Aspecto= require('../models/aspecto');
+const Aspecto= require('../models/aspectoModel');
 // Controlador para obter todos os clientes
 exports.getAllAspecto = (req, res) => {
     Aspecto.getAllAspecto((err, aspecto) => {
