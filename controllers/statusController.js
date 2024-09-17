@@ -1,5 +1,5 @@
 //clienteController.js
-const Status = require('../models/status');
+const Status = require('../models/statusModel');
 // Controlador para obter todos os clientes
 exports.getAllStatus= (req, res) => {
     Status.getAllStatus((err, status) => {
