@@ -1,27 +1,16 @@
 //clienteController.js
-const Aspecto= require('../models/aspectoModel');
+const Aspecto = require('../models/aspectoModel');
 // Controlador para obter todos os clientes
-exports.getAllAspecto = (req, res) => {
-    Aspecto.getAllAspecto((err, aspecto) => {
+exports.getAllAspectos = (req, res) => {
+    Aspecto.getAllAspectos((err, aspectos) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.json(aspecto);
+            res.json(aspectos);
         }
     }); 
 };
-// Controlador para obter um cliente pelo ID
-exports.getAspectoById = (req, res) => {
-    Aspecto.getAspectoById(req.params.id, (err, aspecto) => {
-        if (err) {
-            res.status(500).send(err);
-        } else if (aspecto) {
-            res.json(aspecto);
-        } else {
-            res.status(404).send({ message: 'Aspecto não encontrado' });
-        }
-    });
-};
+
 // Controlador para criar um novo cliente
 exports.createAspecto = (req, res) => {
     Aspecto.createAspecto(req.body, (err, result) => {

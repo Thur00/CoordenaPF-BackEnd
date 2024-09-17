@@ -19,11 +19,10 @@ function getAllAlunos(callback) {
     });
 }
 // Função para buscar um cliente por ID
-function getAlunoByTurma(serie, callback) {
-    const { turma, ano } = serie;
+function getAlunoByTurma(turma, callback) {
     const db = openDbConnection();
-    db.get("SELECT * FROM Aluno WHERE Turma = ? AND Ano = ?", [turma, ano], (err, row) => {
-        db.close(); 
+    db.get("SELECT * FROM Aluno WHERE Turma = ?", [turma], (err, row) => {
+        db.close();
         callback(err, row);
     });
 }
@@ -31,7 +30,7 @@ function getAlunoByTurma(serie, callback) {
 function createAluno(aluno, callback) {
     const { rm, turma, nome, ano } = aluno;
     const db = openDbConnection();
-    db.run("INSERT INTO Aluno (rm, turma, nome, ano) VALUES (?, ?, ?, ?)", [ rm, turma, nome, ano], function (err) {
+    db.run("INSERT INTO Aluno (rm, turma, nome, ano) VALUES (?, ?, ?, ?)", [rm, turma, nome, ano], function (err) {
             db.close();
             callback(err, { id: this.lastID });
         }
@@ -40,10 +39,10 @@ function createAluno(aluno, callback) {
 
 // Função para atualizar um cliente existente
 function updateAluno(id, aluno, callback) {
-    const { rm, turma, nome, ano } = aluno;
+    const {rm, turma, nome, ano } = aluno;
     const db = openDbConnection();
-    db.run("UPDATE Aluno SET RM = ?, Turma = ?, Nome = ?, Ano = ? WHERE RM = ? AND Turma = ?",
-        [rm, turma, nome, ano, id], function (err) {
+    db.run("UPDATE Aluno SET RM = ?, Turma = ?, Nome = ?, Ano = ? WHERE Turma= ?",
+        [rm, turma, nome, ano], function (err) {
             db.close();
             callback(err, { changes: this.changes });
         });

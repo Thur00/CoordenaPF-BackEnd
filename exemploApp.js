@@ -7,10 +7,10 @@ const port = 3000;
 app.use(express.json());
 
 // Importando as rotas do cliente
-const clienteRoutes = require('./routes/clienteRoutes');
+const clienteRoutes = require('./routes/alunoRoutes');
 
 // Usando as rotas do cliente com o prefixo '/clientes'
-app.use('/clientes', clienteRoutes);
+app.use('/alunos', clienteRoutes);
 
 // Iniciando o servidor na porta especificada
 app.listen(port, () => {
