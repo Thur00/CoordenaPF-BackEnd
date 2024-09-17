@@ -19,8 +19,8 @@ function getAllAlunos(callback) {
     });
 }
 // Função para buscar um cliente por ID
-function getAlunoByTurma(turma, callback) {
-    const { turma, ano } = turma;
+function getAlunoByTurma(serie, callback) {
+    const { turma, ano } = serie;
     const db = openDbConnection();
     db.get("SELECT * FROM Aluno WHERE Turma = ? AND Ano = ?", [turma, ano], (err, row) => {
         db.close(); 
