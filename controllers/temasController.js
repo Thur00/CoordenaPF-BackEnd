@@ -1,4 +1,4 @@
-const Temas = require('../models/temas');
+const Temas = require('../models/temasModel');
 exports.getAllTemas = (req, res) => {
     Temas.getAllTemas((err, temas) => {
         if (err) {
