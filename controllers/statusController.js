@@ -13,7 +13,7 @@ exports.getAllStatus= (req, res) => {
 
 // Controlador para criar um novo cliente
 exports.createStatus = (req, res) => {
-    Cliente.createStatus(req.body, (err, result) => {
+    Status.createStatus(req.body, (err, result) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -23,7 +23,7 @@ exports.createStatus = (req, res) => {
 };
 // Controlador para atualizar um cliente existente
 exports.updateStatus = (req, res) => {
-    Cliente.updateStatus(req.params.id, req.body, (err, result) => {
+    Status.updateStatus(req.params.id, req.body, (err, result) => {
         if (err) {
             res.status(500).send(err);
         } else if (result.changes) {
