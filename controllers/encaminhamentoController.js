@@ -1,4 +1,4 @@
-//clienteController.js
+//encaminhamentoController.js
 const Encaminhamento = require('../models/encaminhamentoModel');
 // Controlador para obter todos os encaminhamento
 exports.getAllEncaminhamento = (req, res) => {
@@ -15,7 +15,7 @@ exports.getAllEncaminhamento = (req, res) => {
     });
 };
 
-// Controlador para criar um novo cliente
+// Controlador para criar um novo encaminhamento
 exports.createEncaminhamento = (req, res) => {
     Encaminhamento.createEncaminhamento(req.body, (err, result) => {
         if (err) {
@@ -26,7 +26,7 @@ exports.createEncaminhamento = (req, res) => {
     });
 };
 
-// Controlador para atualizar um cliente existente
+// Controlador para atualizar um encaminhamento existente
 exports.updateEncaminhamento = (req, res) => {
     Encaminhamento.updateEncaminhamento(req.params.id, req.body, (err, result) => {
         if (err) {
