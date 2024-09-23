@@ -34,7 +34,7 @@ function createTema(tema, callback) {
 
 // Função para atualizar um tema existente
 function updateTema(id, tema, callback) {
-    const { Nome_tema } = cliente;
+    const { Nome_tema } = tema;
     const db = openDbConnection();
     db.run("UPDATE Tema SET Nome_tema = ?, WHERE Tema_id = ?",
         [Nome_tema, id], function (err) {
