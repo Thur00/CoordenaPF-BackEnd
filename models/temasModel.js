@@ -14,7 +14,7 @@ function openDbConnection() {
 // Função para buscar todos os temas
 function getAllTemas(callback) {
     const db = openDbConnection();
-    db.all("SELECT * FROM Temas", [], (err, rows) => {
+    db.all("SELECT * FROM Tema", [], (err, rows) => {
         db.close();
         callback(err, rows);
     });
@@ -24,7 +24,7 @@ function getAllTemas(callback) {
 function createTema(tema, callback) {
     const { Nome_tema } = tema;
     const db = openDbConnection();
-    db.run("INSERT INTO Temas ( Nome_tema) VALUES (?)", [Nome_tema
+    db.run("INSERT INTO Tema ( Nome_tema) VALUES (?)", [Nome_tema
         ], function (err) {
             db.close();
             callback(err, { id: this.lastID });
@@ -36,7 +36,7 @@ function createTema(tema, callback) {
 function updateTema(id, tema, callback) {
     const { Nome_tema } = cliente;
     const db = openDbConnection();
-    db.run("UPDATE Temas SET Nome_tema = ?, WHERE Tema_id = ?",
+    db.run("UPDATE Tema SET Nome_tema = ?, WHERE Tema_id = ?",
         [Nome_tema, id], function (err) {
             db.close();
             callback(err, { changes: this.changes });

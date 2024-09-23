@@ -30,7 +30,7 @@ function getAlunoByTurma(turma, callback) {
 function createAluno(aluno, callback) {
     const { rm, turma, nome, ano } = aluno;
     const db = openDbConnection();
-    db.run("INSERT INTO Aluno (rm, turma, nome, ano) VALUES (?, ?, ?, ?)", [rm, turma, nome, ano], function (err) {
+    db.run("INSERT INTO Aluno (RM, Turma, Nome, Ano) VALUES (?, ?, ?, ?)", [rm, turma, nome, ano], function (err) {
             db.close();
             callback(err, { id: this.lastID });
         }
