@@ -1,7 +1,7 @@
 // controllers/alunoController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
-const alunoModel = require("../models/alunoModel");
+const alunoModel = require("../models/alunoModel2");
 
 // Função para obter todos os usuários
 async function getAlunos(req, res) {
