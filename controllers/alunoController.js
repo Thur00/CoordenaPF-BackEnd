@@ -1,47 +1,77 @@
-//clienteController.js
-const Aluno = require('../models/alunoModel');
-// Controlador para obter todos os clientes
-exports.getAllAlunos = (req, res) => {
-    Aluno.getAllAlunos((err, alunos) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.json(alunos);
-        }
-    });
-};
-// Controlador para obter um cliente pelo ID
-exports.getAlunoByTurma = (req, res) => {
-    Aluno.getAlunoByTurma(req.params.id, (err, aluno) => {
-        if (err) {
-            res.status(500).send(err);
-        } else if (aluno) {
-            res.json(aluno);
-        } else {
-            res.status(404).send({ message: 'Aluno não encontrado' });
-        }
-    });
-};
+// controllers/alunoController.js
 
-// Controlador para criar um novo cliente
-exports.createAluno = (req, res) => {
-    Aluno.createAluno(req.body, (err, result) => {
-        if (err) {
-            res.status(500).send(err);
+// Importa o modelo de usuário que contém a lógica de interação com o banco de dados
+const alunoModel = require("../models/alunoModel");
+
+// Função para obter todos os usuários
+async function getAlunos(req, res) {
+    try {
+        // Chama o método do modelo para obter todos os usuários do banco de dados
+        const alunos = await alunoModel.getAllAlunos();
+
+        // Retorna a lista de usuários em formato JSON
+        res.json(alunos);
+    } catch (err) {
+        // Exibe o erro no console, se houver, e retorna uma resposta com status 500
+        console.error(err.message);
+        res.status(500).send("Erro ao obter os alunos");
+    }
+}
+
+// Função para obter um usuário específico pelo ID
+async function getAluno(req, res) {
+    try {
+        // Chama o método do modelo para obter o usuário com base no ID fornecido
+        const aluno = await alunoModel.getAlunoById(req.params.rm);
+
+        // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
+        if (!aluno) {
+            res.status(404).send("Aluno não encontrado");
         } else {
-            res.status(201).json(result);
+            // Se o usuário for encontrado, retorna os dados em formato JSON
+            res.json(aluno);
         }
-    });
-};
-// Controlador para atualizar um cliente existente
-exports.updateAluno = (req, res) => {
-    Aluno.updateAluno(req.params.id, req.body, (err, result) => {
-        if (err) {
-            res.status(500).send(err);
-        } else if (result.changes) {
-            res.status(200).json(result);
-        } else {
-            res.status(404).send({ message: 'Aluno não encontrado' });
-        }
-    });
+    } catch (err) {
+        // Exibe o erro no console e retorna uma resposta com status 500
+        console.error(err.message);
+        res.status(500).send("Erro ao obter o aluno");
+    }
+}
+
+// Função para criar um novo usuário
+async function createAluno(req, res) {
+    try {
+        // Chama o método do modelo para criar o novo usuário com os dados fornecidos
+        await alunoModel.createAluno(req.body);
+
+        // Retorna um status 201 (criado com sucesso)
+        res.status(201).send("Aluno cadastrado com sucesso");
+    } catch (err) {
+        // Exibe o erro no console e retorna uma resposta com status 500
+        console.error(err.message);
+        res.status(500).send("Erro ao cadastrar o aluno");
+    }
+}
+
+// Função para atualizar um usuário existente
+async function updateAluno(req, res) {
+    try {
+        // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
+        await alunoModel.updateAluno(req.params.rm, req.body);
+
+        // Retorna uma mensagem de sucesso após a atualização
+        res.send("Aluno atualizado com sucesso");
+    } catch (err) {
+        // Exibe o erro no console e retorna uma resposta com status 500
+        console.error(err.message);
+        res.status(500).send("Erro ao atualizar o aluno");
+    }
+}
+
+// Exporta as funções do controller para serem usadas nas rotas da aplicação
+module.exports = {
+    getUsers,
+    getUser,
+    createUser,
+    updateUser,
 };

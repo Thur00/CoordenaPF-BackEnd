@@ -1,10 +1,25 @@
 // app.js
-const express = require('express');
-const app = express();
-const port = 3000;
 
-// Middleware para analisar o corpo das requisições em JSON
+// Importa o módulo "express" para criar o servidor
+const express = require("express");
+
+// Cria uma instância do Express, que será usada como a aplicação principal
+const app = express();
+
+// Importa o middleware "cors" para habilitar o compartilhamento de recursos entre diferentes origens (Cross-Origin Resource Sharing)
+const cors = require('cors');
+
+// Define a porta em que o servidor vai rodar. Primeiro tenta usar a variável de ambiente PORT, senão usa a porta 3001
+const port = process.env.PORT || 3001;
+
+// Carrega as variáveis de ambiente do arquivo .env
+require("dotenv").config();
+
+// Middleware do Express para interpretar o corpo das requisições como JSON
 app.use(express.json());
+
+// Middleware "cors" para permitir requisições de diferentes origens (evita problemas de CORS)
+app.use(cors());
 
 // Importando as rotas dos alunos
 const alunoRoutes = require('./routes/alunoRoutes');
@@ -42,7 +57,7 @@ app.use('/temas', temasRoutes);
 // Usando as rotas do cliente com o prefixo '/urgencias'
 app.use('/urgencias', urgenciaRoutes);
 
-// Iniciando o servidor na porta especificada
+// Inicia o servidor na porta definida e exibe uma mensagem no console
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
