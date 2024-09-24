@@ -67,8 +67,7 @@ async function getAlunoByRm(rm) {
 }
 
 // Função para criar um novo usuário
-async function createAluno(aluno) {
-    const { rm, turma, nome, ano } = aluno;  // Extrai os dados do objeto aluno para as variáveis rm, turma, nome e ano
+async function createAluno(rm, turma, nome, ano) {
     const query = `INSERT INTO Aluno (RM, Turma, Nome, Ano) VALUES (@rm, @turma, @nome, @ano);`;  // Query SQL para inserir um novo registro
     const params = [
         { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @name
@@ -80,8 +79,7 @@ async function createAluno(aluno) {
 }
 
 // Função para atualizar um usuário existente
-async function updateAluno(rm, aluno) {
-    const {turma, nome, ano } = aluno;  // Extrai os dados do objeto aluno para as variáveis rm, turma, nome e ano
+async function updateAluno(rm, turma, nome, ano) {
     const query = `UPDATE ALuno SET RM = @name, Turma = @turma, Nome = @nome, Ano = @ano WHERE RM = @rm;`;  // Query SQL para atualizar o registro
     const params = [
         { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @id

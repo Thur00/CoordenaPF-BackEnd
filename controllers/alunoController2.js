@@ -20,9 +20,11 @@ async function getAlunos(req, res) {
 
 // Função para obter um usuário específico pelo ID
 async function getAluno(req, res) {
+    const rm = req.params.rm;
+
     try {
         // Chama o método do modelo para obter o usuário com base no ID fornecido
-        const aluno = await alunoModel.getAlunoByRm(req.params.rm);
+        const aluno = await alunoModel.getAlunoByRm(rm);
 
         // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
         if (!aluno) {
@@ -40,9 +42,11 @@ async function getAluno(req, res) {
 
 // Função para criar um novo usuário
 async function createAluno(req, res) {
+    const { rm, turma, nome, ano } = req.body;
+
     try {
         // Chama o método do modelo para criar o novo usuário com os dados fornecidos
-        await alunoModel.createAluno(req.body);
+        await alunoModel.createAluno(rm, turma, nome, ano);
 
         // Retorna um status 201 (criado com sucesso)
         res.status(201).send("Aluno cadastrado com sucesso");
@@ -55,9 +59,12 @@ async function createAluno(req, res) {
 
 // Função para atualizar um usuário existente
 async function updateAluno(req, res) {
+    const rm = req.params.rm;
+    const { turma, nome, ano } = req.body;
+
     try {
         // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await alunoModel.updateAluno(req.params.rm, req.body);
+        await alunoModel.updateAluno(rm, turma, nome, ano);
 
         // Retorna uma mensagem de sucesso após a atualização
         res.send("Aluno atualizado com sucesso");
