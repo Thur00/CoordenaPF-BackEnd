@@ -21,6 +21,4 @@ async function connectDatabase() {
     });
 }
 // Exporta a função de conexão e o objeto Request para uso em outras partes do código
-module.exports = {
-    connectDatabase,
-};
+module.exports = connectDatabase;
