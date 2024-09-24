@@ -24,6 +24,8 @@ app.use(cors());
 // Importando as rotas dos alunos
 const alunoRoutes = require('./routes/alunoRoutes');
 
+const alunoRoutes2 = require('./routes/alunoRoutes2');
+
 // Importando as rotas dos aspectos
 const aspectoRoutes = require('./routes/aspectoRoutes');
 
@@ -42,7 +44,7 @@ const urgenciaRoutes = require('./routes/urgenciaRoutes');
 // Usando as rotas do cliente com o prefixo '/alunos'
 app.use('/alunos', alunoRoutes);
 
-app.use('/alunos', alunoRoutes2);
+app.use('/alunos2', alunoRoutes2);
 
 // Usando as rotas do cliente com o prefixo '/aspectos'
 app.use('/aspectos', aspectoRoutes);
