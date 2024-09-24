@@ -42,6 +42,8 @@ const urgenciaRoutes = require('./routes/urgenciaRoutes');
 // Usando as rotas do cliente com o prefixo '/alunos'
 app.use('/alunos', alunoRoutes);
 
+app.use('/alunos', alunoRoutes2);
+
 // Usando as rotas do cliente com o prefixo '/aspectos'
 app.use('/aspectos', aspectoRoutes);
 
