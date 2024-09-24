@@ -70,8 +70,8 @@ async function updateAluno(req, res) {
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getUsers,
-    getUser,
-    createUser,
-    updateUser,
+    getAlunos,
+    getAluno,
+    createAluno,
+    updateAluno,
 };
