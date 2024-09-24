@@ -1,4 +1,4 @@
-// models/alunoModel.js
+// models/userModel.js
 
 // Importa o Request e os tipos de dados (TYPES) do pacote "tedious" para criar e executar consultas SQL
 const { Request, TYPES } = require("tedious");
@@ -53,57 +53,54 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllAlunos() {
-    const query = "SELECT * FROM Aluno;";  // Define a query SQL para obter todos os registros da tabela "Alunos"
+async function getAllUsers() {
+    const query = "SELECT * FROM Users;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para obter um usuário pelo ID
-async function getAlunoByRm(rm) {
-    const query = "SELECT * FROM Aluno WHERE RM = @rm;";  // Query SQL com um parâmetro para filtrar pelo ID
-    const params = [{ name: "rm", type: TYPES.Int, value: rm }];  // Define o parâmetro @id para ser passado na query
-    const alunos = await executeQuery(query, params);  // Executa a query com os parâmetros
-    return alunos.length > 0 ? alunos[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
+async function getUserById(id) {
+    const query = "SELECT * FROM Users WHERE users_ID = @id;";  // Query SQL com um parâmetro para filtrar pelo ID
+    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id para ser passado na query
+    const users = await executeQuery(query, params);  // Executa a query com os parâmetros
+    return users.length > 0 ? users[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
 }
 
 // Função para criar um novo usuário
-async function createAluno(aluno) {
-    const { rm, turma, nome, ano } = aluno; // Extrai os dados do objeto aluno para as variáveis rm, turma, nome e ano
-    const query = `INSERT INTO Aluno (RM, Turma, Nome, Ano) VALUES (@rm, @turma, @nome, @ano);`;  // Query SQL para inserir um novo registro
+async function createUser(name, email, age) {
+    const query = `INSERT INTO Users (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @name
-        { name: "turma", type: TYPES.NVarChar, value: turma },  // Define o parâmetro @email
-        { name: "nome", type: TYPES.NVarChar, value: nome },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
-        { name: "ano", type: TYPES.Int, value: ano },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
+        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
+        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
+        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateAluno(aluno) {
-    const { rm, turma, nome, ano } = aluno; // Extrai os dados do objeto aluno para as variáveis rm, turma, nome e ano
-    const query = `UPDATE Aluno SET RM = @rm, Turma = @turma, Nome = @nome, Ano = @ano WHERE RM = @rm;`;  // Query SQL para atualizar o registro
+async function updateUser(id, name, email, age) {
+    const query = `UPDATE Users SET name = @name, email = @email, age = @age WHERE users_ID = @id;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @id
-        { name: "turma", type: TYPES.NVarChar, value: turma },  // Define o parâmetro @name
-        { name: "nome", type: TYPES.NVarChar, value: nome },  // Define o parâmetro @email
-        { name: "ano", type: TYPES.Int, value: ano },  // Define o parâmetro @age
+        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
+        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
+        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
+        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para deletar um usuário pelo ID
-async function deleteAluno(rm) {
-    const query = "DELETE FROM Aluno WHERE RM = @rm;";  // Query SQL para deletar o usuário pelo ID
-    const params = [{ name: "rm", type: TYPES.Int, value: rm }];  // Define o parâmetro @id
+async function deleteUser(id) {
+    const query = "DELETE FROM Users WHERE users_ID = @id;";  // Query SQL para deletar o usuário pelo ID
+    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id
     await executeQuery(query, params);  // Executa a query com o parâmetro
 }
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllAlunos,
-    getAlunoByRm,
-    createAluno,
-    updateAluno,
-    deleteAluno,
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser,
 };

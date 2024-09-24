@@ -1,93 +1,102 @@
-// controllers/alunoController.js
+// controllers/usersController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
-const alunoModel = require("../models/alunoModel");
+const userModel = require("../models/usersModel");
 
 // Função para obter todos os usuários
-async function getAlunos(req, res) {
+async function getUsers(req, res) {
     try {
         // Chama o método do modelo para obter todos os usuários do banco de dados
-        const alunos = await alunoModel.getAllAlunos();
+        const users = await userModel.getAllUsers();
 
         // Retorna a lista de usuários em formato JSON
-        res.json(alunos);
+        res.json(users);
     } catch (err) {
         // Exibe o erro no console, se houver, e retorna uma resposta com status 500
         console.error(err.message);
-        res.status(500).send("Erro ao obter os alunos");
+        res.status(500).send("Erro ao obter os usuários");
     }
 }
 
 // Função para obter um usuário específico pelo ID
-async function getAluno(req, res) {
+async function getUser(req, res) {
+    // Extrai o ID do usuário da requisição (usado na URL: /users/:id)
+    const id = req.params.id;
     try {
         // Chama o método do modelo para obter o usuário com base no ID fornecido
-        const aluno = await alunoModel.getAlunoByRm(req.params.rm);
+        const user = await userModel.getUserById(id);
 
         // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
-        if (!aluno) {
-            res.status(404).send("Aluno não encontrado");
+        if (!user) {
+            res.status(404).send("Usuário não encontrado");
         } else {
             // Se o usuário for encontrado, retorna os dados em formato JSON
-            res.json(aluno);
+            res.json(user);
         }
     } catch (err) {
         // Exibe o erro no console e retorna uma resposta com status 500
         console.error(err.message);
-        res.status(500).send("Erro ao obter o aluno");
+        res.status(500).send("Erro ao obter o usuário");
     }
 }
 
 // Função para criar um novo usuário
-async function createAluno(req, res) {
+async function createUser(req, res) {
+    // Extrai as informações do novo usuário a partir do corpo da requisição (name, email, age)
+    const { name, email, age } = req.body;
     try {
         // Chama o método do modelo para criar o novo usuário com os dados fornecidos
-        await alunoModel.createAluno(req.body);
+        await userModel.createUser(name, email, age);
 
         // Retorna um status 201 (criado com sucesso)
-        res.status(201).send("Aluno cadastrado com sucesso");
+        res.status(201).send("Usuário criado com sucesso");
     } catch (err) {
         // Exibe o erro no console e retorna uma resposta com status 500
         console.error(err.message);
-        res.status(500).send("Erro ao cadastrar o aluno");
+        res.status(500).send("Erro ao criar o usuário");
     }
 }
 
 // Função para atualizar um usuário existente
-async function updateAluno(req, res) {
+async function updateUser(req, res) {
+    // Extrai o ID do usuário da URL e os novos dados do corpo da requisição
+    const id = req.params.id;
+    const { name, email, age } = req.body;
     try {
         // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await alunoModel.updateAluno(req.body);
+        await userModel.updateUser(id, name, email, age);
 
         // Retorna uma mensagem de sucesso após a atualização
-        res.send("Aluno atualizado com sucesso");
+        res.send("Usuário atualizado com sucesso");
     } catch (err) {
         // Exibe o erro no console e retorna uma resposta com status 500
         console.error(err.message);
-        res.status(500).send("Erro ao atualizar o aluno");
+        res.status(500).send("Erro ao atualizar o usuário");
     }
 }
 
 // Função para deletar um usuário
-async function deleteAluno(req, res) {
+async function deleteUser(req, res) {
+    // Extrai o ID do usuário da URL
+    const id = req.params.id;
     try {
         // Chama o método do modelo para deletar o usuário com base no ID fornecido
-        await alunoModel.deleteAluno(req.params.rm);
+        await userModel.deleteUser(id);
 
         // Retorna uma mensagem de sucesso após a exclusão
-        res.send("Aluno deletado com sucesso");
+        res.send("Usuário deletado com sucesso");
     } catch (err) {
         // Exibe o erro no console e retorna uma resposta com status 500
         console.error(err.message);
-        res.status(500).send("Erro ao deletar o aluno");
+        res.status(500).send("Erro ao deletar o usuário");
     }
 }
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getAlunos,
-    getAluno,
-    createAluno,
-    updateAluno,
-    deleteAluno,
+    getUsers,
+    getUser,
+    createUser,
+    updateUser,
+    deleteUser,
 };

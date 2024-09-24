@@ -25,5 +25,9 @@ router.post("/", alunoController.createAluno);
 // Chama o método "updateAluno" do controller ao acessar "/alunos/:rm" e fornecer novos dados no corpo da requisição
 router.put("/:rm", alunoController.updateAluno);
 
+// Rota DELETE para deletar um usuário específico pelo ID
+// Chama o método "deleteUser" do controller ao acessar "/users/:id"
+router.delete("/:rm", alunoController.deleteAluno);
+
 // Exporta o roteador para que ele possa ser usado na aplicação principal (app.js)
 module.exports = router;
