@@ -23,8 +23,8 @@ async function executeQuery(query, params = []) {
         });
 
         // Adiciona parâmetros à requisição SQL (nome, tipo e valor)
-        params.forEach(({ name, type, value }) => {
-            request.addParameter(name, type, value);
+        params.forEach(({ Tipo_urgencia, cor }) => {
+            request.addParameter(Tipo_urgencia, cor);
         });
 
         // Array para armazenar os resultados retornados pela query
@@ -53,45 +53,44 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllUsers() {
-    const query = "SELECT * FROM Users;";  // Define a query SQL para obter todos os registros da tabela "Users"
+async function getAllUrgencias() {
+    const query = "SELECT * FROM Urgencias;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para obter um usuário pelo ID
-async function getUserById(id) {
-    const query = "SELECT * FROM Users WHERE users_ID = @id;";  // Query SQL com um parâmetro para filtrar pelo ID
+async function getUrgenciaById(id) {
+    const query = "SELECT * FROM Urgencias WHERE urgencias_ID = @id;";  // Query SQL com um parâmetro para filtrar pelo ID
     const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id para ser passado na query
-    const users = await executeQuery(query, params);  // Executa a query com os parâmetros
-    return users.length > 0 ? users[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
+    const urgencias = await executeQuery(query, params);  // Executa a query com os parâmetros
+    return urgencias.length > 0 ? urgencias[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
 }
 
 // Função para criar um novo usuário
-async function createUser(name, email, age) {
-    const query = `INSERT INTO Users (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
+async function createUrgencia(Tipo_urgencia, cor) {
+    const query = `INSERT INTO Urgencias (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
+        { name: "Tipo_urgencia", type: TYPES.NVarChar, value: Tipo_urgencia },  
+        { name: "cor", type: TYPES.NVarChar, value: cor }, 
+       , 
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateUser(id, name, email, age) {
+async function updateUrgencia(id, Tipo_urgencia, cor) {
     const query = `UPDATE Users SET name = @name, email = @email, age = @age WHERE users_ID = @id;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age
+        { name: "id", type: TYPES.Int, value: id },  
+        { name: "Tipo_urgencia", type: TYPES.NVarChar, value: Tipo_urgencia },  
+        { name: "cor", type: TYPES.NVarChar, value: cor },  
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllUsers,
-    createUser,
-    updateUser,
+    getAllUrgencias,
+    createUrgencia,
+    updateUrgencia,
 };
