@@ -1,7 +1,7 @@
 // controllers/temaController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
-const userModel = require("../models/temaModel");
+const temaModel = require("../models/temaModel");
 
 // Função para obter todos os temas
 async function getAllTemas(req, res) {
