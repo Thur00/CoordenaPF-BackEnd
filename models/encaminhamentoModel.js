@@ -53,37 +53,36 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllUsers() {
-    const query = "SELECT * FROM Users;";  // Define a query SQL para obter todos os registros da tabela "Users"
+async function getAllEncaminhamentos() {
+    const query = "SELECT * FROM Encaminhamento;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para criar um novo usuário
-async function createUser(name, email, age) {
-    const query = `INSERT INTO Users (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
+async function createEncaminhamento(Encaminhamento) {
+    const { Nome_encaminhamento } = Encaminhamento;  // Extrai o nome do aspecto do objeto passado como parâmetro
+    const query = `INSERT INTO Encaminhamento (Nome_encaminhamento) VALUES (@Nome_encaminhamento);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
+        { name: "Nome_encaminhamento", type: TYPES.VarChar, value: Nome_encaminhamento },  // Define o parâmetro @name
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateUser(id, name, email, age) {
-    const query = `UPDATE Users SET name = @name, email = @email, age = @age WHERE users_ID = @id;`;  // Query SQL para atualizar o registro
+async function updateEncaminhamento(id, Encaminhamento) {
+    const { Nome_encaminhamento } = Encaminhamento;  // Extrai o nome do aspecto do objeto passado como parâmetro
+    const query = `UPDATE Encaminhamento SET Nome_encaminhamento = @Nome_encaminhamento WHERE Encaminhamento_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age
+        { name: "Encaminhamento_id", type: TYPES.Int, value: id },  // Define o parâmetro @id
+        { name: "Nome_encaminhamento", type: TYPES.NVarChar, value: Nome_encaminhamento },  // Define o parâmetro @nome
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
+
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllUsers,
-    createUser,
-    updateUser,
+    getAllEncaminhamentos,
+    createEncaminhamento,
+    updateEncaminhamento,
 };

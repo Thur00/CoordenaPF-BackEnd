@@ -5,6 +5,7 @@ const { Request, TYPES } = require("tedious");
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
+const { getAllEncaminhamentos } = require("./encaminhamentoModel");
 
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
@@ -53,37 +54,36 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllUsers() {
-    const query = "SELECT * FROM Users;";  // Define a query SQL para obter todos os registros da tabela "Users"
+async function getAllNotificacao() {
+    const query = "SELECT * FROM Notificacao;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para criar um novo usuário
-async function createUser(name, email, age) {
-    const query = `INSERT INTO Users (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
+async function createNotificacao(Cod_ocorrencia, Criador, Solicitado) {
+    const query = `INSERT INTO Notificacao (Cod_ocorrencia, Criador, Solicitado) VALUES (@Cod_ocorrencia, @Criador, @Solicitado);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age, sendo nulo caso não seja fornecido
+        { name: "Cod_ocorrencia", type: TYPES.VarChar, value: Cod_ocorrencia },  // Define o parâmetro @name
+        { name: "Criador", type: TYPES.VarChar, value: Criador },
+        { name: "Solicitado", type: TYPES.VarChar, value: Solicitado },
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateUser(id, name, email, age) {
-    const query = `UPDATE Users SET name = @name, email = @email, age = @age WHERE users_ID = @id;`;  // Query SQL para atualizar o registro
+async function updateNotificacao(id, notificacao) {
+    const query = `UPDATE Notificacao SET Cod_ocorrencia = @nome WHERE Notificacao_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
-        { name: "name", type: TYPES.NVarChar, value: name },  // Define o parâmetro @name
-        { name: "email", type: TYPES.NVarChar, value: email },  // Define o parâmetro @email
-        { name: "age", type: TYPES.Int, value: age || null },  // Define o parâmetro @age
+        { name: "Cod_ocorrencia", type: TYPES.VarChar, value: Cod_ocorrencia },  // Define o parâmetro @name
+        { name: "Criador", type: TYPES.VarChar, value: Criador },
+        { name: "Solicitado", type: TYPES.VarChar, value: Solicitado },
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllUsers,
-    createUser,
-    updateUser,
+    getAllNotificacao,
+    createNotificacao,
+    updateNotificacao,
 };
