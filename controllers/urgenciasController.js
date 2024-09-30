@@ -42,7 +42,7 @@ async function updateUrgencia(req, res) {
     const { Tipo_urgencia, Cor } = req.body;
     try {
         // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await urgenciaModel.updateUrgencia(Tipo_urgencia, Cor);
+        await urgenciaModel.updateUrgencia(id, Tipo_urgencia, Cor);
 
         // Retorna uma mensagem de sucesso após a atualização
         res.send("Urgência atualizada com sucesso");
