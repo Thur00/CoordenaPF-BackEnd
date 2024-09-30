@@ -11,7 +11,7 @@ const urgenciasController = require("../controllers/urgenciasController");
 
 // Rota GET para obter todos os usuários
 // Chama o método "getUsers" do controller quando a rota raiz "/users" for acessada
-router.get("/", urgenciasController.getUrgencias);
+router.get("/", urgenciasController.getAllUrgencias);
 
 // Rota POST para criar um novo usuário
 // Chama o método "createUser" do controller ao acessar "/users" com dados no corpo da requisição

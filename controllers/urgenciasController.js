@@ -4,7 +4,7 @@
 const urgenciaModel = require("../models/urgenciasModel");
 
 // Função para obter todos os usuários
-async function getUrgencias(req, res) {
+async function getAllUrgencias(req, res) {
     try {
         // Chama o método do modelo para obter todos os usuários do banco de dados
         const urgencias = await urgenciaModel.getAllUrgencias();
@@ -55,7 +55,7 @@ async function updateUrgencia(req, res) {
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getUrgencias,
+    getAllUrgencias,
     createUrgencia,
     updateUrgencia,
 };
