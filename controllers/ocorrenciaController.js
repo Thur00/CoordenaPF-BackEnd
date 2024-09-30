@@ -5,53 +5,52 @@ const OcorrenciasModel = require("../models/ocorrenciasModel");
 
 // Função para obter todos os usuários
 async function getOcorrencias(req, res) {
-    try {
-        // Chama o método do modelo para obter todos os usuários do banco de dados
-        const Ocorrencias = await OcorrenciasModel.getAllOcorrencias();
+  try {
+    // Chama o método do modelo para obter todos os usuários do banco de dados
+    const Ocorrencias = await OcorrenciasModel.getAllOcorrencias();
 
-        // Retorna a lista de usuários em formato JSON
-        res.json(Ocorrencias);
-    } catch (err) {
-        // Exibe o erro no console, se houver, e retorna uma resposta com status 500
-        console.error(err.message);
-        res.status(500).send("Erro ao obter os Ocorrencias");
-    }
+    // Retorna a lista de usuários em formato JSON
+    res.json(Ocorrencias);
+  } catch (err) {
+    // Exibe o erro no console, se houver, e retorna uma resposta com status 500
+    console.error(err.message);
+    res.status(500).send("Erro ao obter os Ocorrencias");
+  }
 }
 
 // Função para criar um novo usuário
 async function createOcorrencias(req, res) {
-    // Extrai as informações do novo usuário a partir do corpo da requisição (name, email, age)
-    try {
-        // Chama o método do modelo para criar o novo usuário com os dados fornecidos
-        await OcorrenciasModel.createOcorrencias(req.body);
+  try {
+    // Chama o método do modelo para criar o novo usuário com os dados fornecidos
+    await OcorrenciasModel.createOcorrencias(req.body);
 
-        // Retorna um status 201 (criado com sucesso)
-        res.status(201).send("Ocorrencias criado com sucesso");
-    } catch (err) {
-        // Exibe o erro no console e retorna uma resposta com status 500
-        console.error(err.message);
-        res.status(500).send("Erro ao criar o Ocorrencias");
-    }
+    // Retorna um status 201 (criado com sucesso)
+    res.status(201).send("Ocorrencias criado com sucesso");
+  } catch (err) {
+    // Exibe o erro no console e retorna uma resposta com status 500
+    console.error(err.message);
+    res.status(500).send("Erro ao criar o Ocorrencias");
+  }
 }
 
 // Função para atualizar um usuário existente
 async function updateOcorrencias(req, res) {
-    try {
-        // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await OcorrenciasModel.updateOcorrencias(req.params.id, req.body);
+  try {
+    // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
+    await OcorrenciasModel.updateOcorrencias(req.params.id, req.body);
 
-        // Retorna uma mensagem de sucesso após a atualização
-        res.send("Ocorrencias atualizado com sucesso");
-    } catch (err) {
-        // Exibe o erro no console e retorna uma resposta com status 500
-        console.error(err.message);
-        res.status(500).send("Erro ao atualizar o Ocorrencias");
-    }
+    // Retorna uma mensagem de sucesso após a atualização
+    res.send("Ocorrencias atualizado com sucesso");
+  } catch (err) {
+    // Exibe o erro no console e retorna uma resposta com status 500
+    console.error(err.message);
+    res.status(500).send("Erro ao atualizar o Ocorrencias");
+  }
 }
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getOcorrencias,
-    createOcorrencias,
-    updateOcorrencias,
+  getOcorrencias,
+  createOcorrencias,
+  updateOcorrencias,
 };
