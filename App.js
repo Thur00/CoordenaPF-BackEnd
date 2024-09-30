@@ -39,6 +39,12 @@ const temaRoutes = require('./routes/temaRoutes');
 // Importando as rotas das urgencias
 const urgenciasRoutes = require('./routes/urgenciasRoutes');
 
+// Importando as rotas das usuarios
+const usuarioRoutes = require('./routes/usuarioRoutes');
+
+// Importando as rotas das notificacoes
+const usuarioRoutes = require('./routes/usuarioRoutes');
+
 // Usando as rotas do cliente com o prefixo '/alunos'
 app.use('/alunos', alunoRoutes);
 
@@ -56,6 +62,12 @@ app.use('/temas', temaRoutes);
 
 // Usando as rotas do cliente com o prefixo '/urgencias'
 app.use('/urgencias', urgenciasRoutes);
+
+// Usando as rotas do cliente com o prefixo '/usuarios'
+app.use('/usuarios', usuarioRoutes);
+
+// Usando as rotas do cliente com o prefixo '/notificacoes'
+app.use('/notificacoes', usuarioRoutes);
 
 
 // Inicia o servidor na porta definida e exibe uma mensagem no console
