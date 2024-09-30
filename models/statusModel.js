@@ -5,6 +5,7 @@ const { Request, TYPES } = require("tedious");
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
+const { getAllStatus } = require("../controllers/statusController");
 
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
@@ -22,7 +23,7 @@ async function executeQuery(query, params = []) {
             }
         });
 
-        // Adiciona parâmetros à requisição SQL (nome, tipo e valor)
+        // Adiciona parâmetros à requisição SQL (categoria, tipo e valor)
         params.forEach(({ name, type, value }) => {
             request.addParameter(name, type, value);
         });
@@ -53,35 +54,40 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllAspectos() {
-    const query = "SELECT * FROM Aspecto;";  // Define a query SQL para obter todos os registros da tabela "Users"
+async function getAllStatus() {
+    const query = "SELECT * FROM Status;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para criar um novo usuário
-async function createAspecto(aspecto) {
-    const { nome } = aspecto;  // Extrai o nome do aspecto do objeto passado como parâmetro
-    const query = `INSERT INTO Aspecto (Nome) VALUES (@nome);`;  // Query SQL para inserir um novo registro
+async function createStatus(Status) {
+    const { categoria, icone } = Status;  // Extrai o categoria do Status do objeto passado como parâmetro
+    const query = `INSERT INTO Status (Categoria, Icone) VALUES (@categoria, @icone);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "nome", type: TYPES.VarChar, value: nome },  // Define o parâmetro @name
+        { name: "categoria", type: TYPES.VarChar, value: categoria },  // Define o parâmetro @name
+        { name: "icone", type: TYPES.VarChar, value: icone },  
+
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateAspecto(id, aspecto) {
-    const { nome } = aspecto;  // Extrai o nome do aspecto do objeto passado como parâmetro
-    const query = `UPDATE Aspecto SET Nome = @nome WHERE Aspecto_id = @id;`;  // Query SQL para atualizar o registro
+async function updateStatus(id, Status) {
+    const { categoria, icone } = Status;  // Extrai o categoria do Status do objeto passado como parâmetro
+    const query = `UPDATE Status SET Categoria = @categoria WHERE Status_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
         { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
-        { name: "nome", type: TYPES.NVarChar, value: nome },  // Define o parâmetro @nome
+        { name: "categoria", type: TYPES.NVarChar, value: categoria },  // Define o parâmetro @categoria
+        { name: "icone", type: TYPES.NVarChar, value: icone },  
+
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
+
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllAspectos,
-    createAspecto,
-    updateAspecto,
+    getAllStatus,
+    createStatus,
+    updateStatus,
 };
