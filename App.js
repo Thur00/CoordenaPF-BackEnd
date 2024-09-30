@@ -58,7 +58,7 @@ app.use('/aspectos', aspectoRoutes);
 // app.use('/urgencias', urgenciaRoutes);
 
 // Importa as rotas de usuários definidas em "./routes/users"
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/usersRoutes");
 
 // Associa as rotas de usuários ao caminho "/users"
 // Todas as requisições que começarem com "/users" serão tratadas pelas rotas definidas em "userRoutes"
