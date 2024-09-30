@@ -1,4 +1,4 @@
-// controllers/usersController.js
+// controllers/urgenciasController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
 const urgenciaModel = require("../models/urgenciasModel");
@@ -21,10 +21,10 @@ async function getUrgencias(req, res) {
 // Função para criar um novo usuário
 async function createUrgencia(req, res) {
     // Extrai as informações do novo usuário a partir do corpo da requisição (name, email, age)
-    const { name, email, age } = req.body;
+    const { Tipo_urgencia, Cor } = req.body;
     try {
         // Chama o método do modelo para criar o novo usuário com os dados fornecidos
-        await urgenciaModel.createUrgencia(Tipo_urgencia, cor);
+        await urgenciaModel.createUrgencia(Tipo_urgencia, Cor);
 
         // Retorna um status 201 (criado com sucesso)
         res.status(201).send("Urgência criada com sucesso");
@@ -39,10 +39,10 @@ async function createUrgencia(req, res) {
 async function updateUrgencia(req, res) {
     // Extrai o ID do usuário da URL e os novos dados do corpo da requisição
     const id = req.params.id;
-    const { Tipo_urgencia, cor } = req.body;
+    const { Tipo_urgencia, Cor } = req.body;
     try {
         // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await urgenciaModel.updateUrgencia(Tipo_urgencia, cor);
+        await urgenciaModel.updateUrgencia(Tipo_urgencia, Cor);
 
         // Retorna uma mensagem de sucesso após a atualização
         res.send("Urgência atualizada com sucesso");

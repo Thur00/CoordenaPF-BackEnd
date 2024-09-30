@@ -54,28 +54,28 @@ async function executeQuery(query, params = []) {
 
 // Função para obter todos os usuários do banco de dados
 async function getAllUrgencias() {
-    const query = "SELECT * FROM Urgencias;";  // Define a query SQL para obter todos os registros da tabela "Users"
+    const query = "SELECT * FROM Urgencia;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para criar um novo usuário
-async function createUrgencia(Tipo_urgencia, cor) {
-    const query = `INSERT INTO Urgencias (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
+async function createUrgencia(Tipo_urgencia, Cor) {
+    const query = `INSERT INTO Urgencia (Tipo_urgencia, Cor) VALUES (@Tipo_urgencia, @Cor);`;  // Query SQL para inserir um novo registro
     const params = [
         { name: "Tipo_urgencia", type: TYPES.NVarChar, value: Tipo_urgencia },  
-        { name: "cor", type: TYPES.NVarChar, value: cor }, 
+        { name: "Cor", type: TYPES.NVarChar, value: Cor }, 
        , 
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateUrgencia(id, Tipo_urgencia, cor) {
-    const query = `UPDATE Users SET name = @name, email = @email, age = @age WHERE users_ID = @id;`;  // Query SQL para atualizar o registro
+async function updateUrgencia(id, Tipo_urgencia, Cor) {
+    const query = `UPDATE Urgencia SET Tipo_urgencia = @Tipo_urgencia, Cor = @Cor WHERE Urgencia_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
         { name: "id", type: TYPES.Int, value: id },  
         { name: "Tipo_urgencia", type: TYPES.NVarChar, value: Tipo_urgencia },  
-        { name: "cor", type: TYPES.NVarChar, value: cor },  
+        { name: "Cor", type: TYPES.NVarChar, value: Cor },  
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }

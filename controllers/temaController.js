@@ -4,7 +4,7 @@
 const userModel = require("../models/temaModel");
 
 // Função para obter todos os temas
-async function getTemas(req, res) {
+async function getAllTemas(req, res) {
     try {
         // Chama o método do modelo para obter todos os temas do banco de dados
         const temas = await temaModel.getAllTemas();
@@ -55,7 +55,7 @@ async function updateTema(req, res) {
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getTemas,
+    getAllTemas,
     createTema,
     updateTema,
 };

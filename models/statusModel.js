@@ -74,7 +74,7 @@ async function createStatus(Status) {
 // Função para atualizar um usuário existente
 async function updateStatus(id, Status) {
     const { categoria, icone } = Status;  // Extrai o categoria do Status do objeto passado como parâmetro
-    const query = `UPDATE Status SET Categoria = @categoria WHERE Status_id = @id;`;  // Query SQL para atualizar o registro
+    const query = `UPDATE Status SET Categoria = @categoria, Icone = @icone WHERE Status_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
         { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
         { name: "categoria", type: TYPES.NVarChar, value: categoria },  // Define o parâmetro @categoria

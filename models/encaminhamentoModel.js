@@ -1,4 +1,4 @@
-// models/userModel.js
+// models/encaminhamentoModel.js
 
 // Importa o Request e os tipos de dados (TYPES) do pacote "tedious" para criar e executar consultas SQL
 const { Request, TYPES } = require("tedious");

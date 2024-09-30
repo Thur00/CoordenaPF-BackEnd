@@ -1,10 +1,10 @@
-// controllers/aspectoController.js
+// controllers/encaminhamentoController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
 const EncaminhamentoModel = require("../models/encaminhamentoModel");
 
 // Função para obter todos os usuários
-async function getEncaminhamento(req, res) {
+async function getAllEncaminhamentos(req, res) {
     try {
         // Chama o método do modelo para obter todos os usuários do banco de dados
         const encaminhamento = await EncaminhamentoModel.getAllEncaminhamentos();
@@ -51,7 +51,7 @@ async function updateEncaminhamento(req, res) {
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-    getEncaminhamento,
+    getAllEncaminhamentos,
     createEncaminhamento,
     updateEncaminhamento,
 };
