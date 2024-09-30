@@ -42,7 +42,7 @@ async function updateTema(req, res) {
     const { Nome_tema } = req.body;
     try {
         // Chama o método do modelo para atualizar o tema com base no ID e nos dados fornecidos
-        await userModel.updateTema(id, Nome_tema);
+        await temaModel.updateTema(id, Nome_tema);
 
         // Retorna uma mensagem de sucesso após a atualização
         res.send("Tema atualizado com sucesso");
