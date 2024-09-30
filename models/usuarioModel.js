@@ -5,11 +5,6 @@ const { Request, TYPES } = require("tedious");
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
-const {
-  getAllUsuarios,
-  createUsuario,
-  updateUsuario,
-} = require("../controllers/usuarioController");
 
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
