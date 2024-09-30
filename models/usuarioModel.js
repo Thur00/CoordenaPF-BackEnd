@@ -1,11 +1,11 @@
-// models/statusModel.js
+// models/usuarioModel.js
 
 // Importa o Request e os tipos de dados (TYPES) do pacote "tedious" para criar e executar consultas SQL
 const { Request, TYPES } = require("tedious");
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
-const { getAllStatus } = require("../controllers/statusController");
+const { getAllUsuarios, createUsuario, updateUsuario } = require("../controllers/usuarioController");
 
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
@@ -54,31 +54,36 @@ async function executeQuery(query, params = []) {
 }
 
 // Função para obter todos os usuários do banco de dados
-async function getAllStatus() {
-    const query = "SELECT * FROM Status;";  // Define a query SQL para obter todos os registros da tabela "Users"
+async function getAllUsuarios() {
+    const query = "SELECT * FROM usuarios;";  // Define a query SQL para obter todos os registros da tabela "Users"
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
 // Função para criar um novo usuário
-async function createStatus(Status) {
-    const { categoria, icone } = Status;  // Extrai o categoria do Status do objeto passado como parâmetro
-    const query = `INSERT INTO Status (Categoria, Icone) VALUES (@categoria, @icone);`;  // Query SQL para inserir um novo registro
+async function createUsuario(usuario) {
+    const { nome, email, senha, cpf } = usuario;  // Extrai o categoria do Status do objeto passado como parâmetro
+    const query = `INSERT INTO usuarios (Nome, Email, Senha, CPF) VALUES (@nome, @email, @senha, @cpf);`;  // Query SQL para inserir um novo registro
     const params = [
-        { name: "categoria", type: TYPES.VarChar, value: categoria },  // Define o parâmetro @name
-        { name: "icone", type: TYPES.VarChar, value: icone },  
+        { name: "nome", type: TYPES.VarChar, value: nome },  // Define o parâmetro @name
+        { name: "email", type: TYPES.VarChar, value: email },
+        { name: "senha", type: TYPES.VarChar, value: senha },  
+        { name: "cpf", type: TYPES.Int, value: cpf },  
+
 
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
-async function updateStatus(id, Status) {
-    const { categoria, icone } = Status;  // Extrai o categoria do Status do objeto passado como parâmetro
-    const query = `UPDATE Status SET Categoria = @categoria, Icone = @icone WHERE Status_id = @id;`;  // Query SQL para atualizar o registro
+async function updateUsuario(id, usuario) {
+    const { nome, email, senha, cpf } = usuario;  // Extrai o categoria do Status do objeto passado como parâmetro
+    const query = `UPDATE usuarios SET Nome = @nome, Email = @email, Senha = @senha, CPF = @cpf WHERE Login_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
         { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
-        { name: "categoria", type: TYPES.NVarChar, value: categoria },  // Define o parâmetro @categoria
-        { name: "icone", type: TYPES.NVarChar, value: icone },  
+        { name: "nome", type: TYPES.VarChar, value: nome },  // Define o parâmetro @name
+        { name: "email", type: TYPES.VarChar, value: email },
+        { name: "senha", type: TYPES.VarChar, value: senha },  
+        { name: "cpf", type: TYPES.Int, value: cpf },  
 
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
@@ -87,7 +92,7 @@ async function updateStatus(id, Status) {
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
-    getAllStatus,
-    createStatus,
-    updateStatus,
+    getAllUsuarios,
+    createUsuario,
+    updateUsuario,
 };
