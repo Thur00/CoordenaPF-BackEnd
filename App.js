@@ -30,8 +30,8 @@ const aspectoRoutes = require('./routes/aspectoRoutes');
 // // Importando as rotas dos encaminhamentos
 // const encaminhamentoRoutes = require('./routes/encaminhamentoRoutes');
 
-// // Importando as rotas dos status
-// const statusRoutes = require('./routes/statusRoutes');
+// Importando as rotas dos status
+const statusRoutes = require('./routes/statusRoutes');
 
 // // Importando as rotas dos temas
 // const temasRoutes = require('./routes/temasRoutes');
@@ -48,8 +48,8 @@ app.use('/aspectos', aspectoRoutes);
 // // Usando as rotas do cliente com o prefixo '/encaminhamentos'
 // app.use('/encaminhamentos', encaminhamentoRoutes);
 
-// // Usando as rotas do cliente com o prefixo '/'status
-// app.use('/status', statusRoutes);
+// Usando as rotas do cliente com o prefixo '/'status
+app.use('/status', statusRoutes);
 
 // // Usando as rotas do cliente com o prefixo '/temas'
 // app.use('/temas', temasRoutes);
