@@ -58,14 +58,6 @@ async function getAllUrgencias() {
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
-// Função para obter um usuário pelo ID
-async function getUrgenciaById(id) {
-    const query = "SELECT * FROM Urgencias WHERE urgencias_ID = @id;";  // Query SQL com um parâmetro para filtrar pelo ID
-    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id para ser passado na query
-    const urgencias = await executeQuery(query, params);  // Executa a query com os parâmetros
-    return urgencias.length > 0 ? urgencias[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
-}
-
 // Função para criar um novo usuário
 async function createUrgencia(Tipo_urgencia, cor) {
     const query = `INSERT INTO Urgencias (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
