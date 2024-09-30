@@ -80,14 +80,15 @@ async function createAluno(aluno) {
 }
 
 // Função para atualizar um usuário existente
-async function updateAluno(aluno) {
+async function updateAluno(orm, aluno) {
     const { rm, turma, nome, ano } = aluno; // Extrai os dados do objeto aluno para as variáveis rm, turma, nome e ano
-    const query = `UPDATE Aluno SET RM = @rm, Turma = @turma, Nome = @nome, Ano = @ano WHERE RM = @rm;`;  // Query SQL para atualizar o registro
+    const query = `UPDATE Aluno SET RM = @rm, Turma = @turma, Nome = @nome, Ano = @ano WHERE RM = @orm;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @id
-        { name: "turma", type: TYPES.NVarChar, value: turma },  // Define o parâmetro @name
-        { name: "nome", type: TYPES.NVarChar, value: nome },  // Define o parâmetro @email
-        { name: "ano", type: TYPES.Int, value: ano },  // Define o parâmetro @age
+        { name: "orm", type: TYPES.Int, value: orm },  // Define o parâmetro @orm
+        { name: "rm", type: TYPES.Int, value: rm },  // Define o parâmetro @rm
+        { name: "turma", type: TYPES.NVarChar, value: turma },  // Define o parâmetro @turma
+        { name: "nome", type: TYPES.NVarChar, value: nome },  // Define o parâmetro @nome
+        { name: "ano", type: TYPES.Int, value: ano },  // Define o parâmetro @ano
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }

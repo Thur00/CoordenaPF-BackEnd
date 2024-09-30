@@ -57,7 +57,7 @@ async function createAluno(req, res) {
 async function updateAluno(req, res) {
     try {
         // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
-        await alunoModel.updateAluno(req.body);
+        await alunoModel.updateAluno(req.params.rm, req.body);
 
         // Retorna uma mensagem de sucesso após a atualização
         res.send("Aluno atualizado com sucesso");
