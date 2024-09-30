@@ -68,10 +68,11 @@ async function createTema(Nome_tema) {
 }
 
 // Função para atualizar um tema existente
-async function updateTema(Nome_tema) {
+async function updateTema(id, Nome_tema) {
     const query = `UPDATE Tema SET Nome_tema = @Nome_tema WHERE Tema_id = @id;`;  // Query SQL para atualizar o registro
     const params = [
-        { name: "Nome_tema", type: TYPES.Int, value: Nome_tema },  // Define o parâmetro @id
+        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
+        { name: "Nome_tema", type: TYPES.NVarChar, value: Nome_tema },  // Define o parâmetro @id
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
