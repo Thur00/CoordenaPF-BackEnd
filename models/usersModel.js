@@ -89,18 +89,9 @@ async function updateUser(id, name, email, age) {
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
-// Função para deletar um usuário pelo ID
-async function deleteUser(id) {
-    const query = "DELETE FROM Users WHERE users_ID = @id;";  // Query SQL para deletar o usuário pelo ID
-    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id
-    await executeQuery(query, params);  // Executa a query com o parâmetro
-}
-
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
     getAllUsers,
-    getUserById,
     createUser,
     updateUser,
-    deleteUser,
 };

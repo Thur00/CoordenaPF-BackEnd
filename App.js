@@ -57,6 +57,13 @@ app.use('/status', statusRoutes);
 // // Usando as rotas do cliente com o prefixo '/urgencias'
 // app.use('/urgencias', urgenciaRoutes);
 
+// Importa as rotas de usuários definidas em "./routes/users"
+const userRoutes = require("./routes/usersRoutes");
+
+// Associa as rotas de usuários ao caminho "/users"
+// Todas as requisições que começarem com "/users" serão tratadas pelas rotas definidas em "userRoutes"
+app.use("/users", userRoutes);
+
 // Inicia o servidor na porta definida e exibe uma mensagem no console
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

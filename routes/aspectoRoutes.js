@@ -21,9 +21,5 @@ router.post("/", AspectosController.createAspecto);
 // Chama o método "updateAspecto" do controller ao acessar "/aspectos/:id" e fornecer novos dados no corpo da requisição
 router.put("/:id", AspectosController.updateAspecto);
 
-// Rota DELETE para deletar um usuário específico pelo ID
-// Chama o método "deleteAspecto" do controller ao acessar "/aspectos/:id"
-router.delete("/:id", AspectosController.deleteAspecto);
-
 // Exporta o roteador para que ele possa ser usado na aplicação principal (app.js)
 module.exports = router;
