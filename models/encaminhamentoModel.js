@@ -73,7 +73,7 @@ async function updateEncaminhamento(id, Encaminhamento) {
     const { Nome_encaminhamento } = Encaminhamento;  // Extrai o nome do aspecto do objeto passado como parâmetro
     const query = `UPDATE Encaminhamento SET Nome_encaminhamento = @Nome_encaminhamento WHERE Encaminhamento_id = @id;`  // Query SQL para atualizar o registro
     const params = [
-        { name: "Encaminhamento_id", type: TYPES.Int, value: id },  // Define o parâmetro @id
+        { name: "id", type: TYPES.Int, value: id },  // Define o parâmetro @id
         { name: "Nome_encaminhamento", type: TYPES.NVarChar, value: Nome_encaminhamento },  // Define o parâmetro @nome
     ];
     await executeQuery(query, params);  // Executa a query com os parâmetros
