@@ -58,14 +58,6 @@ async function getAllUsers() {
     return await executeQuery(query);  // Executa a query usando a função executeQuery
 }
 
-// Função para obter um usuário pelo ID
-async function getUserById(id) {
-    const query = "SELECT * FROM Users WHERE users_ID = @id;";  // Query SQL com um parâmetro para filtrar pelo ID
-    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id para ser passado na query
-    const users = await executeQuery(query, params);  // Executa a query com os parâmetros
-    return users.length > 0 ? users[0] : null;  // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
-}
-
 // Função para criar um novo usuário
 async function createUser(name, email, age) {
     const query = `INSERT INTO Users (name, email, age) VALUES (@name, @email, @age);`;  // Query SQL para inserir um novo registro
