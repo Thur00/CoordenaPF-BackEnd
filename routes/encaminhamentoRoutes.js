@@ -1,4 +1,4 @@
-// routes/aspectos.js
+// routes/encaminhamento.js
 
 // Importa o módulo "express" para criar um roteador
 const express = require("express");
@@ -7,11 +7,11 @@ const express = require("express");
 const router = express.Router();
 
 // Importa o controller de usuários que contém a lógica para cada rota
-const AspectosController = require("../controllers/encaminhamentoController");
+const EncaminhamentoController = require("../controllers/encaminhamentoController");
 
 // Rota GET para obter todos os usuários
 // Chama o método "getAspectos" do controller quando a rota raiz "/aspectos" for acessada
-router.get("/", EncaminhamentoController.getEncaminhamento);
+router.get("/", EncaminhamentoController.getAllEncaminhamentos);
 
 // Rota POST para criar um novo usuário
 // Chama o método "createAspecto" do controller ao acessar "/aspectos" com dados no corpo da requisição

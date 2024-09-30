@@ -7,11 +7,11 @@ const express = require("express");
 const router = express.Router();
 
 // Importa o controller de temas que contém a lógica para cada rota
-const usersController = require("../controllers/temaController");
+const temaController = require("../controllers/temaController");
 
 // Rota GET para obter todos os temas
 // Chama o método "getTemas" do controller quando a rota raiz "/temas" for acessada
-router.get("/", temaController.getTemas);
+router.get("/", temaController.getAllTemas);
 
 // Rota POST para criar um novo tema
 // Chama o método "createTema" do controller ao acessar "/tema" com dados no corpo da requisição
