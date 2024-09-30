@@ -18,28 +18,6 @@ async function getUsers(req, res) {
     }
 }
 
-// Função para obter um usuário específico pelo ID
-async function getUser(req, res) {
-    // Extrai o ID do usuário da requisição (usado na URL: /users/:id)
-    const id = req.params.id;
-    try {
-        // Chama o método do modelo para obter o usuário com base no ID fornecido
-        const user = await userModel.getUserById(id);
-
-        // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
-        if (!user) {
-            res.status(404).send("Usuário não encontrado");
-        } else {
-            // Se o usuário for encontrado, retorna os dados em formato JSON
-            res.json(user);
-        }
-    } catch (err) {
-        // Exibe o erro no console e retorna uma resposta com status 500
-        console.error(err.message);
-        res.status(500).send("Erro ao obter o usuário");
-    }
-}
-
 // Função para criar um novo usuário
 async function createUser(req, res) {
     // Extrai as informações do novo usuário a partir do corpo da requisição (name, email, age)
@@ -75,28 +53,9 @@ async function updateUser(req, res) {
     }
 }
 
-// Função para deletar um usuário
-async function deleteUser(req, res) {
-    // Extrai o ID do usuário da URL
-    const id = req.params.id;
-    try {
-        // Chama o método do modelo para deletar o usuário com base no ID fornecido
-        await userModel.deleteUser(id);
-
-        // Retorna uma mensagem de sucesso após a exclusão
-        res.send("Usuário deletado com sucesso");
-    } catch (err) {
-        // Exibe o erro no console e retorna uma resposta com status 500
-        console.error(err.message);
-        res.status(500).send("Erro ao deletar o usuário");
-    }
-}
-
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
     getUsers,
-    getUser,
     createUser,
     updateUser,
-    deleteUser,
 };

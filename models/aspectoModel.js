@@ -79,17 +79,9 @@ async function updateAspecto(id, aspecto) {
     await executeQuery(query, params);  // Executa a query com os parâmetros
 }
 
-// Função para deletar um usuário pelo ID
-async function deleteAspecto(id) {
-    const query = "DELETE FROM Aspecto WHERE Aspecto_id = @id;";  // Query SQL para deletar o usuário pelo ID
-    const params = [{ name: "id", type: TYPES.Int, value: id }];  // Define o parâmetro @id
-    await executeQuery(query, params);  // Executa a query com o parâmetro
-}
-
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
     getAllAspectos,
     createAspecto,
     updateAspecto,
-    deleteAspecto,
 };
