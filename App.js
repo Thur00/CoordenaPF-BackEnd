@@ -37,7 +37,7 @@ const statusRoutes = require("./routes/statusRoutes");
 const temaRoutes = require("./routes/temaRoutes");
 
 // Importando as rotas das urgencias
-const urgenciasRoutes = require("./routes/urgenciasRoutes");
+const urgenciasRoutes = require("./routes/urgenciaRoutes");
 
 // Importando as rotas das usuarios
 const usuarioRoutes = require("./routes/usuarioRoutes");
