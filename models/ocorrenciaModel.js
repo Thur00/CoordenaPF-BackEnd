@@ -79,7 +79,7 @@ async function createOcorrencias(ocorrencias) {
 
   const query = `INSERT INTO ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsável, Descricao, Encaminhamento, Status) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsável, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
-    { name: "Criador", type: TYPES.NVarChar, value: Criador }, // Define o parâmetro @name
+    { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
     { name: "Hora", type: TYPES.Time, value: Hora },
     { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
@@ -119,20 +119,20 @@ async function updateOcorrencias(id, ocorrencias) {
   const query = `UPDATE ocorrencias SET Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsável, Descricao, Encaminhamento, Status = @Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsável, @Descricao, @Encaminhamento, @Status WHERE Ocorrencias_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "Ocorrencia_id", type: TYPES.Int, value: id }, // Define o parâmetro @id
-    { name: "Criador", type: TYPES.VarChar, value: Criador }, // Define o parâmetro @name
+    { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
     { name: "Hora", type: TYPES.Time, value: Hora },
-    { name: "Iniciativa", type: TYPES.VarChar, value: Iniciativa },
-    { name: "Aspecto", type: TYPES.VarChar, value: Aspecto },
-    { name: "Urgencia", type: TYPES.VarChar, value: Urgencia },
-    { name: "Tema", type: TYPES.VarChar, value: Tema },
-    { name: "Turma", type: TYPES.VarChar, value: Turma },
-    { name: "Estudantes", type: TYPES.VarChar, value: Estudantes },
+    { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
+    { name: "Aspecto", type: TYPES.NVarChar, value: Aspecto },
+    { name: "Urgencia", type: TYPES.NVarChar, value: Urgencia },
+    { name: "Tema", type: TYPES.NVarChar, value: Tema },
+    { name: "Turma", type: TYPES.NVarChar, value: Turma },
+    { name: "Estudantes", type: TYPES.NVarChar, value: Estudantes },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
-    { name: "Responsável", type: TYPES.VarChar, value: Responsável },
-    { name: "Descricao", type: TYPES.VarChar, value: Descricao },
-    { name: "Encaminhamento", type: TYPES.VarChar, value: Encaminhamento },
-    { name: "Status", type: TYPES.VarChar, value: Status },
+    { name: "Responsável", type: TYPES.NVarChar, value: Responsável },
+    { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
+    { name: "Encaminhamento", type: TYPES.NVarChar, value: Encaminhamento },
+    { name: "Status", type: TYPES.NVarChar, value: Status },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
