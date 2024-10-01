@@ -46,7 +46,7 @@ const usuarioRoutes = require("./routes/usuarioRoutes");
 const notificacaoRoutes = require("./routes/notificacaoRoutes");
 
 // Importando as rotas das ocorrencias
-const ocorrenciasRoutes = require("./routes/ocorrenciasRoutes");
+const ocorrenciasRoutes = require("./routes/ocorrenciaRoutes");
 
 // Usando as rotas do cliente com o prefixo '/alunos'
 app.use("/alunos", alunoRoutes);

@@ -4,7 +4,7 @@
 const OcorrenciasModel = require("../models/ocorrenciaModel");
 
 // Função para obter todos os usuários
-async function getOcorrencias(req, res) {
+async function getAllOcorrencias(req, res) {
   try {
     // Chama o método do modelo para obter todos os usuários do banco de dados
     const Ocorrencias = await OcorrenciasModel.getAllOcorrencias();
@@ -50,7 +50,7 @@ async function updateOcorrencias(req, res) {
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
-  getOcorrencias,
+  getAllOcorrencias,
   createOcorrencias,
   updateOcorrencias,
 };
