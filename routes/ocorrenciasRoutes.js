@@ -7,7 +7,7 @@ const express = require("express");
 const router = express.Router();
 
 // Importa o controller de usuários que contém a lógica para cada rota
-const ocorrenciasController = require("../controllers/ocorrenciasController");
+const ocorrenciasController = require("../controllers/ocorrenciaController");
 
 // Rota GET para obter todos os usuários
 // Chama o método "getocorrencias" do controller quando a rota raiz "/ocorrencias" for acessada

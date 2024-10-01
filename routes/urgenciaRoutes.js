@@ -7,7 +7,7 @@ const express = require("express");
 const router = express.Router();
 
 // Importa o controller de usuários que contém a lógica para cada rota
-const urgenciasController = require("../controllers/urgenciasController");
+const urgenciasController = require("../controllers/urgenciaController");
 
 // Rota GET para obter todos os usuários
 // Chama o método "getUsers" do controller quando a rota raiz "/users" for acessada

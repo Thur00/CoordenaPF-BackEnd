@@ -1,7 +1,7 @@
 // controllers/urgenciasController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
-const urgenciaModel = require("../models/urgenciasModel");
+const urgenciaModel = require("../models/urgenciaModel");
 
 // Função para obter todos os usuários
 async function getAllUrgencias(req, res) {
@@ -19,7 +19,7 @@ async function getAllUrgencias(req, res) {
 }
 
 // Função para criar um novo usuário
-async function createUrgencia(req, res) { 
+async function createUrgencia(req, res) {
   try {
     // Chama o método do modelo para criar o novo usuário com os dados fornecidos
     await urgenciaModel.createUrgencia(req.body);
