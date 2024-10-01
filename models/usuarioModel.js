@@ -67,7 +67,7 @@ async function createUsuario(usuario) {
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "senha", type: TYPES.NVarChar, value: senha },
-    { name: "cpf", type: TYPES.Int, value: cpf },
+    { name: "cpf", type: TYPES.NVarChar, value: cpf },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
@@ -82,7 +82,7 @@ async function updateUsuario(id, usuario) {
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "senha", type: TYPES.NVarChar, value: senha },
-    { name: "cpf", type: TYPES.Int, value: cpf },
+    { name: "cpf", type: TYPES.NVarChar, value: cpf },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
