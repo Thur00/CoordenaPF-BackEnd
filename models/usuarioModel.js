@@ -64,9 +64,9 @@ async function createUsuario(usuario) {
 
   const query = `INSERT INTO usuarios (Nome, Email, Senha, CPF) VALUES (@nome, @email, @senha, @cpf);`; // Query SQL para inserir um novo registro
   const params = [
-    { name: "nome", type: TYPES.VarChar, value: nome }, // Define o parâmetro @name
-    { name: "email", type: TYPES.VarChar, value: email },
-    { name: "senha", type: TYPES.VarChar, value: senha },
+    { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
+    { name: "email", type: TYPES.NVarChar, value: email },
+    { name: "senha", type: TYPES.NVarChar, value: senha },
     { name: "cpf", type: TYPES.Int, value: cpf },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
@@ -79,9 +79,9 @@ async function updateUsuario(id, usuario) {
   const query = `UPDATE usuarios SET Nome = @nome, Email = @email, Senha = @senha, CPF = @cpf WHERE Login_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
-    { name: "nome", type: TYPES.VarChar, value: nome }, // Define o parâmetro @name
-    { name: "email", type: TYPES.VarChar, value: email },
-    { name: "senha", type: TYPES.VarChar, value: senha },
+    { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
+    { name: "email", type: TYPES.NVarChar, value: email },
+    { name: "senha", type: TYPES.NVarChar, value: senha },
     { name: "cpf", type: TYPES.Int, value: cpf },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
