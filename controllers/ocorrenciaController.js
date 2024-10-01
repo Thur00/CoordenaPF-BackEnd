@@ -1,7 +1,7 @@
 // controllers/aspectoController.js
 
 // Importa o modelo de usuário que contém a lógica de interação com o banco de dados
-const OcorrenciasModel = require("../models/ocorrenciasModel");
+const OcorrenciasModel = require("../models/ocorrenciaModel");
 
 // Função para obter todos os usuários
 async function getOcorrencias(req, res) {
