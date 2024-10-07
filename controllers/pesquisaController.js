@@ -24,7 +24,7 @@ async function getAlunoByRm(req, res) {
 async function getAlunoByNome(req, res) {
   try {
     const aluno = await pesquisaModel.getAlunoByNome(req.params.nome);
-    if (aluno.length === 0) {
+    if (!aluno) {
       return res.status(404).send("Nome não encontrado");
     } else {
       return res.json(aluno);
@@ -50,7 +50,7 @@ async function getAlunoByTema(req, res) {
 async function getAlunoByData(req, res) {
   try {
     const alunos = await pesquisaModel.getAlunoByData(req.params);
-    if (alunos.length === 0) {
+    if (!alunos) {
       return res
         .status(404)
         .send("Nenhuma data encontrada para o período informado");
