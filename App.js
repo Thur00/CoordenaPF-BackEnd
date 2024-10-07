@@ -79,7 +79,7 @@ app.use("/notificacoes", notificacaoRoutes);
 app.use("/ocorrencias", ocorrenciasRoutes);
 
 // Usando as rotas do cliente com o prefixo '/pesquisas'
-app.use("/ocorrencias", pesquisaRoutes);
+app.use("/pesquisa", pesquisaRoutes);
 
 // Inicia o servidor na porta definida e exibe uma mensagem no console
 app.listen(port, () => {
