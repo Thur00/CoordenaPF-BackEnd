@@ -85,7 +85,7 @@ async function getAlunoByData(datas) {
   return alunos.length > 0 ? alunos[0] : null;
 }
 async function getAlunoByStatus(status) {
-  const query = "SELECT * FROM Ocorrencias WHERE Stattuss = @status;";
+  const query = "SELECT * FROM Ocorrencias WHERE Statuss = @status;";
   const params = [{ name: "status", type: TYPES.NVarChar, value: status }];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
