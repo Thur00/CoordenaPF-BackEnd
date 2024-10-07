@@ -59,9 +59,9 @@ async function getAlunoByRm(rm) {
   return alunos.length > 0 ? alunos[0] : null; // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
 }
 async function getAlunoByNome(nome) {
-  const query = "SELECT * FROM Ocorrencias WHERE Estudantes LIKE '%@nome%';";
+  const query = "SELECT * FROM Ocorrencias WHERE Estudantes LIKE @nome;";
   const params = [
-    { name: "nome", type: TYPES.NVarChar, value: nome },
+    { name: "nome", type: TYPES.NVarChar, value: `%${nome}%` },
   ];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
