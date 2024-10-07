@@ -23,8 +23,8 @@ async function executeQuery(query, params = []) {
     });
 
     // Adiciona parâmetros à requisição SQL (nome, tipo e valor)
-    params.forEach(({ Tipo_urgencia, cor }) => {
-      request.addParameter(Tipo_urgencia, cor);
+    params.forEach(({ name, type, value }) => {
+      request.addParameter(name, type, value);
     });
 
     // Array para armazenar os resultados retornados pela query
@@ -61,12 +61,15 @@ async function getAllUrgencias() {
 // Função para criar um novo usuário
 async function createUrgencia(urgencia) {
   const { tipo_urgencia, cor } = urgencia;
+  console.log ("ooooo")
 
   const query = `INSERT INTO Urgencia (Tipo_urgencia, Cor) VALUES (@tipo_urgencia, @cor);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "tipo_urgencia", type: TYPES.NVarChar, value: tipo_urgencia },
     { name: "cor", type: TYPES.NVarChar, value: cor },
   ];
+console.log("cor = "+cor)
+
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 

@@ -79,20 +79,20 @@ async function createOcorrencias(ocorrencias) {
 
   const query = `INSERT INTO ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsável, Descricao, Encaminhamento, Status) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsável, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
-    { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
+    { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
-    { name: "Hora", type: TYPES.Time, value: Hora },
+    { name: "Hora", type: TYPES.NVarChar, value: Hora },
     { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
-    { name: "Aspecto", type: TYPES.NVarChar, value: Aspecto },
-    { name: "Urgencia", type: TYPES.NVarChar, value: Urgencia },
-    { name: "Tema", type: TYPES.NVarChar, value: Tema },
+    { name: "Aspecto", type: TYPES.Int, value: Aspecto },
+    { name: "Urgencia", type: TYPES.Int, value: Urgencia },
+    { name: "Tema", type: TYPES.Int, value: Tema },
     { name: "Turma", type: TYPES.NVarChar, value: Turma },
     { name: "Estudantes", type: TYPES.NVarChar, value: Estudantes },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
     { name: "Responsável", type: TYPES.NVarChar, value: Responsável },
     { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
-    { name: "Encaminhamento", type: TYPES.NVarChar, value: Encaminhamento },
-    { name: "Status", type: TYPES.NVarChar, value: Status },
+    { name: "Encaminhamento", type: TYPES.Int, value: Encaminhamento },
+    { name: "Status", type: TYPES.Int, value: Status },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
