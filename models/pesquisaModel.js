@@ -53,21 +53,21 @@ async function executeQuery(query, params = []) {
 }
 
 async function getAlunoByRm(rm) {
-  const query = "SELECT * FROM Ocorrencias WHERE RM = @rm;"; // Query SQL com um parâmetro para filtrar pelo ID
+  const query = "SELECT * FROM Ocorrencias WHERE RM_aluno = @rm;"; // Query SQL com um parâmetro para filtrar pelo ID
   const params = [{ name: "rm", type: TYPES.Int, value: rm }]; // Define o parâmetro @id para ser passado na query
   const alunos = await executeQuery(query, params); // Executa a query com os parâmetros
   return alunos.length > 0 ? alunos[0] : null; // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
 }
-async function getAlunoByNome(nome_completo) {
-  const query = "SELECT * FROM Ocorrencias WHERE nome_completo LIKE '%nome_aqui%';";
+async function getAlunoByNome(nome) {
+  const query = "SELECT * FROM Ocorrencias WHERE Estudantes LIKE '%nome%';";
   const params = [
-    { name: "nome_completo", type: TYPES.NVarChar, value: nome_completo },
+    { name: "nome", type: TYPES.NVarChar, value: nome },
   ];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
 }
 async function getAlunoByTema(tema) {
-  const query = "SELECT * FROM Ocorrencias WHERE TEMA = @tema;";
+  const query = "SELECT * FROM Ocorrencias WHERE Tema = @tema;";
   const params = [{ name: "tema", type: TYPES.NVarChar, value: tema }];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
@@ -85,13 +85,13 @@ async function getAlunoByData(datas) {
   return alunos.length > 0 ? alunos[0] : null;
 }
 async function getAlunoByStatus(status) {
-  const query = "SELECT * FROM Ocorrencias WHERE STATUS = @status;";
+  const query = "SELECT * FROM Ocorrencias WHERE Stattuss = @status;";
   const params = [{ name: "status", type: TYPES.NVarChar, value: status }];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
 }
 async function getAlunoByUrgencia(urgencia) {
-  const query = "SELECT * FROM Ocorrencias WHERE URGENCIA = @urgencia;";
+  const query = "SELECT * FROM Ocorrencias WHERE Urgencia = @urgencia;";
   const params = [{ name: "urgencia", type: TYPES.NVarChar, value: urgencia }];
   const alunos = await executeQuery(query, params);
   return alunos.length > 0 ? alunos[0] : null;
