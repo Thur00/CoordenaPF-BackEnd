@@ -15,7 +15,7 @@ router.get("/", alunoController.getAlunos);
 
 // Rota GET para obter um usuário específico pelo ID
 // Chama o método "getAluno" do controller ao acessar "/alunos/:rm", onde ":id" é o ID do usuário
-router.get("/:rm", alunoController.getAluno);
+router.get("/:rm", alunoController.getAlunoByRm);
 
 // Rota POST para criar um novo usuário
 // Chama o método "createAluno" do controller ao acessar "/alunos" com dados no corpo da requisição
