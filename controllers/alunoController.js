@@ -19,7 +19,7 @@ async function getAlunos(req, res) {
 }
 
 // Função para obter um usuário específico pelo ID
-async function getAluno(req, res) {
+async function getAlunoByRm(req, res) {
   try {
     // Chama o método do modelo para obter o usuário com base no ID fornecido
     const aluno = await alunoModel.getAlunoByRm(req.params.rm);
@@ -86,7 +86,7 @@ async function deleteAluno(req, res) {
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
   getAlunos,
-  getAluno,
+  getAlunoByRm,
   createAluno,
   updateAluno,
   deleteAluno,
