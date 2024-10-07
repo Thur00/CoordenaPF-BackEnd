@@ -1,7 +1,12 @@
+// controllers/pesquisaController.js
+
+// Importa o modelo de usuário que contém a lógica de interação com o banco de dados
+const pesquisaModel = require("../models/pesquisaModel");
+
 async function getAlunoByRm(req, res) {
   try {
     // Chama o método do modelo para obter o usuário com base no ID fornecido
-    const aluno = await alunoModel.getAlunoByRm(req.params.rm);
+    const aluno = await pesquisaModel.getAlunoByRm(req.params.rm);
 
     // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
     if (!aluno) {
@@ -18,7 +23,7 @@ async function getAlunoByRm(req, res) {
 }
 async function getAlunoByNome(req, res) {
   try {
-    const aluno = await alunoModel.getAlunoByNome(req.params.nome);
+    const aluno = await pesquisaModel.getAlunoByNome(req.params.nome);
     if (aluno.length === 0) {
       return res.status(404).send("Nome não encontrado");
     } else {
@@ -31,7 +36,7 @@ async function getAlunoByNome(req, res) {
 }
 async function getAlunoByTema(req, res) {
   try {
-    const aluno = await alunoModel.getAlunoByTema(req.params.tema);
+    const aluno = await pesquisaModel.getAlunoByTema(req.params.tema);
     if (!aluno) {
       res.status(404).send("Tema não encontrado");
     } else {
@@ -44,7 +49,7 @@ async function getAlunoByTema(req, res) {
 }
 async function getAlunoByData(req, res) {
   try {
-    const alunos = await alunoModel.getAlunoByData(req.params);
+    const alunos = await pesquisaModel.getAlunoByData(req.params);
     if (alunos.length === 0) {
       return res
         .status(404)
@@ -59,7 +64,7 @@ async function getAlunoByData(req, res) {
 }
 async function getAlunoByStatus(req, res) {
   try {
-    const aluno = await alunoModel.getAlunoByStatus(req.params.status);
+    const aluno = await pesquisaModel.getAlunoByStatus(req.params.status);
     if (!aluno) {
       res.status(404).send("Status não encontrado");
     } else {
@@ -72,7 +77,7 @@ async function getAlunoByStatus(req, res) {
 }
 async function getAlunoByUrgencia(req, res) {
   try {
-    const aluno = await alunoModel.getAlunoByUrgencia(req.params.urgencia);
+    const aluno = await pesquisaModel.getAlunoByUrgencia(req.params.urgencia);
     if (!aluno) {
       res.status(404).send("Urgência não encontrada");
     } else {
