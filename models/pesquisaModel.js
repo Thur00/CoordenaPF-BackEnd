@@ -59,7 +59,7 @@ async function getAlunoByRm(rm) {
   return alunos.length > 0 ? alunos[0] : null; // Retorna o primeiro usuário se houver algum resultado, ou null se não houver
 }
 async function getAlunoByNome(nome) {
-  const query = "SELECT * FROM Ocorrencias WHERE Estudantes LIKE '%nome%';";
+  const query = "SELECT * FROM Ocorrencias WHERE Estudantes LIKE '%@nome%';";
   const params = [
     { name: "nome", type: TYPES.NVarChar, value: nome },
   ];
@@ -76,7 +76,7 @@ async function getAlunoByData(datas) {
   const { data_inicial, data_final } = datas;
 
   const query =
-    "SELECT * FROM Ocorrencias WHERE DATA BETWEEN '@data_inical' AND '@data_final'";
+    "SELECT * FROM Ocorrencias WHERE Data_ocorrencia BETWEEN '@data_inical' AND '@data_final'";
   const params = [
     { name: "data_inicial", type: TYPES.Date, value: data_inicial },
     { name: "data_final", type: TYPES.Date, value: data_final },
