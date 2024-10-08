@@ -71,13 +71,13 @@ async function createOcorrencias(ocorrencias) {
     Turma,
     Estudantes,
     Rm_aluno,
-    Responsável,
+    Responsavel,
     Descricao,
     Encaminhamento,
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsável, Descricao, Encaminhamento, Status) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsável, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
@@ -89,7 +89,7 @@ async function createOcorrencias(ocorrencias) {
     { name: "Turma", type: TYPES.NVarChar, value: Turma },
     { name: "Estudantes", type: TYPES.NVarChar, value: Estudantes },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
-    { name: "Responsável", type: TYPES.NVarChar, value: Responsável },
+    { name: "Responsavel", type: TYPES.NVarChar, value: Responsavel },
     { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
     { name: "Encaminhamento", type: TYPES.Int, value: Encaminhamento },
     { name: "Status", type: TYPES.Int, value: Status },
@@ -110,29 +110,29 @@ async function updateOcorrencias(id, ocorrencias) {
     Turma,
     Estudantes,
     Rm_aluno,
-    Responsável,
+    Responsavel,
     Descricao,
     Encaminhamento,
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE ocorrencias SET Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsável, Descricao, Encaminhamento, Status = @Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsável, @Descricao, @Encaminhamento, @Status WHERE Ocorrencias_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE ocorrencias SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Estudantes = @Estudantes, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
   const params = [
-    { name: "Ocorrencia_id", type: TYPES.Int, value: id }, // Define o parâmetro @id
+    { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
-    { name: "Hora", type: TYPES.Time, value: Hora },
+    { name: "Hora", type: TYPES.NVarChar, value: Hora },
     { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
-    { name: "Aspecto", type: TYPES.NVarChar, value: Aspecto },
-    { name: "Urgencia", type: TYPES.NVarChar, value: Urgencia },
-    { name: "Tema", type: TYPES.NVarChar, value: Tema },
+    { name: "Aspecto", type: TYPES.Int, value: Aspecto },
+    { name: "Urgencia", type: TYPES.Int, value: Urgencia },
+    { name: "Tema", type: TYPES.Int, value: Tema },
     { name: "Turma", type: TYPES.NVarChar, value: Turma },
     { name: "Estudantes", type: TYPES.NVarChar, value: Estudantes },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
-    { name: "Responsável", type: TYPES.NVarChar, value: Responsável },
+    { name: "Responsavel", type: TYPES.NVarChar, value: Responsavel },
     { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
-    { name: "Encaminhamento", type: TYPES.NVarChar, value: Encaminhamento },
-    { name: "Status", type: TYPES.NVarChar, value: Status },
+    { name: "Encaminhamento", type: TYPES.Int, value: Encaminhamento },
+    { name: "Status", type: TYPES.Int, value: Status },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
