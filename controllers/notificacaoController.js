@@ -14,7 +14,7 @@ async function getNotificacao(req, res) {
   } catch (err) {
     // Exibe o erro no console, se houver, e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao obter os Notificacao");
+    res.status(500).send("Erro ao obter a notificação");
   }
 }
 
@@ -25,11 +25,11 @@ async function createNotificacao(req, res) {
     await NotificacaoModel.createNotificacao(req.body);
 
     // Retorna um status 201 (criado com sucesso)
-    res.status(201).send("Notificacao criado com sucesso");
+    res.status(201).send("Notificação criada com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao criar o notificacao");
+    res.status(500).send("Erro ao criar a notificação");
   }
 }
 
@@ -40,11 +40,11 @@ async function updateNotificacao(req, res) {
     await NotificacaoModel.updateNotificacao(req.params.id, req.body);
 
     // Retorna uma mensagem de sucesso após a atualização
-    res.send("Notificacao atualizado com sucesso");
+    res.send("Notificação atualizada com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao atualizar o Notificacao");
+    res.status(500).send("Erro ao atualizar a notificação");
   }
 }
 

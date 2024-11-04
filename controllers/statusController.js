@@ -29,7 +29,7 @@ async function createStatus(req, res) {
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao criar o Status");
+    res.status(500).send("Erro ao criar o status");
   }
 }
 
@@ -44,7 +44,7 @@ async function updateStatus(req, res) {
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao atualizar o Status");
+    res.status(500).send("Erro ao atualizar o status");
   }
 }
 

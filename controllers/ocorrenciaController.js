@@ -14,7 +14,7 @@ async function getAllOcorrencias(req, res) {
   } catch (err) {
     // Exibe o erro no console, se houver, e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao obter os Ocorrencias");
+    res.status(500).send("Erro ao obter as ocorrências");
   }
 }
 
@@ -25,11 +25,11 @@ async function createOcorrencias(req, res) {
     await OcorrenciasModel.createOcorrencias(req.body);
 
     // Retorna um status 201 (criado com sucesso)
-    res.status(201).send("Ocorrencias criado com sucesso");
+    res.status(201).send("Ocorrência criada com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao criar o Ocorrencias");
+    res.status(500).send("Erro ao criar a ocorrência");
   }
 }
 
@@ -40,11 +40,11 @@ async function updateOcorrencias(req, res) {
     await OcorrenciasModel.updateOcorrencias(req.params.id, req.body);
 
     // Retorna uma mensagem de sucesso após a atualização
-    res.send("Ocorrencias atualizado com sucesso");
+    res.send("Ocorrência atualizada com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao atualizar o Ocorrencias");
+    res.status(500).send("Erro ao atualizar as ocorrências");
   }
 }
 

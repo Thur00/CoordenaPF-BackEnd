@@ -25,7 +25,7 @@ async function createUsuario(req, res) {
     await usuarioModel.createUsuario(req.body);
 
     // Retorna um usuario 201 (criado com sucesso)
-    res.status(201).send("usuário criado com sucesso");
+    res.status(201).send("Usuário criado com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com usuario 500
     console.error(err.message);
@@ -40,11 +40,11 @@ async function updateUsuario(req, res) {
     await usuarioModel.updateUsuario(req.params.id, req.body);
 
     // Retorna uma mensagem de sucesso após a atualização
-    res.send("usuario atualizado com sucesso");
+    res.send("Usuário atualizado com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com usuario 500
     console.error(err.message);
-    res.status(500).send("Erro ao atualizar o usuario");
+    res.status(500).send("Erro ao atualizar o usuário");
   }
 }
 
