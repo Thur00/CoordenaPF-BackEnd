@@ -77,7 +77,7 @@ async function createOcorrencias(ocorrencias) {
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO Ocorrencias (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma, Estudantes, Rm_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Estudantes, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
@@ -116,7 +116,7 @@ async function updateOcorrencias(id, ocorrencias) {
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE ocorrencias SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Estudantes = @Estudantes, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE Ocorrencias SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Estudantes = @Estudantes, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
