@@ -60,23 +60,23 @@ async function getAllTemas() {
 
 // Função para criar um novo tema
 async function createTema(tema) {
-  const { Nome_tema } = tema;
+  const { nome_tema } = tema;
 
-  const query = `INSERT INTO Tema (Nome_tema) VALUES (@Nome_tema);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO Tema (Nome_tema) VALUES (@nome_tema);`; // Query SQL para inserir um novo registro
   const params = [
-    { name: "Nome_tema", type: TYPES.NVarChar, value: Nome_tema }, // Define o parâmetro @name
+    { name: "nome_tema", type: TYPES.NVarChar, value: nome_tema }, // Define o parâmetro @name
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
 // Função para atualizar um tema existente
 async function updateTema(id, tema) {
-  const { Nome_tema } = tema;
+  const { nome_tema } = tema;
 
-  const query = `UPDATE Tema SET Nome_tema = @Nome_tema WHERE Tema_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE Tema SET Nome_tema = @nome_tema WHERE Tema_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
-    { name: "Nome_tema", type: TYPES.NVarChar, value: Nome_tema }, // Define o parâmetro @id
+    { name: "nome_tema", type: TYPES.NVarChar, value: nome_tema }, // Define o parâmetro @id
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }

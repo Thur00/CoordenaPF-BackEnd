@@ -61,27 +61,24 @@ async function getAllUrgencias() {
 // Função para criar um novo usuário
 async function createUrgencia(urgencia) {
   const { tipo_urgencia, cor } = urgencia;
-  console.log ("ooooo")
 
   const query = `INSERT INTO Urgencia (Tipo_urgencia, Cor) VALUES (@tipo_urgencia, @cor);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "tipo_urgencia", type: TYPES.NVarChar, value: tipo_urgencia },
     { name: "cor", type: TYPES.NVarChar, value: cor },
   ];
-console.log("cor = "+cor)
-
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
 async function updateUrgencia(id, urgencia) {
-  const { Tipo_urgencia, Cor } = urgencia;
+  const { tipo_urgencia, cor } = urgencia;
 
-  const query = `UPDATE Urgencia SET Tipo_urgencia = @Tipo_urgencia, Cor = @Cor WHERE Urgencia_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE Urgencia SET Tipo_urgencia = @tipo_urgencia, Cor = @cor WHERE Urgencia_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id },
-    { name: "Tipo_urgencia", type: TYPES.NVarChar, value: Tipo_urgencia },
-    { name: "Cor", type: TYPES.NVarChar, value: Cor },
+    { name: "tipo_urgencia", type: TYPES.NVarChar, value: tipo_urgencia },
+    { name: "cor", type: TYPES.NVarChar, value: cor },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
