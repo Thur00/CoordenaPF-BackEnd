@@ -14,7 +14,7 @@ async function getAllEncaminhamentos(req, res) {
   } catch (err) {
     // Exibe o erro no console, se houver, e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao obter os encaminhamento");
+    res.status(500).send("Erro ao obter os encaminhamentos");
   }
 }
 

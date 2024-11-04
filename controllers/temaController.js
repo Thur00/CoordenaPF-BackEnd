@@ -23,7 +23,7 @@ async function createTema(req, res) {
   try {
     // Chama o método do modelo para criar o novo tema com os dados fornecidos
     const resultado = await temaModel.createTema(req.body);
-    res.status(201).json(resultado);
+    res.status(201).send("Tema criado com sucesso");
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
