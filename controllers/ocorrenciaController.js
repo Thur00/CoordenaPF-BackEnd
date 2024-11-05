@@ -18,6 +18,26 @@ async function getAllOcorrencias(req, res) {
   }
 }
 
+// Função para obter um usuário específico pelo ID
+async function getOcorrenciaById(req, res) {
+  try {
+    // Chama o método do modelo para obter o usuário com base no ID fornecido
+    const ocorrencia = await OcorrenciasModel.getOcorrenciaById(req.params.id);
+
+    // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
+    if (!ocorrencia) {
+      res.status(404).send("Ocorrência não encontrada");
+    } else {
+      // Se o usuário for encontrado, retorna os dados em formato JSON
+      res.json(ocorrencia);
+    }
+  } catch (err) {
+    // Exibe o erro no console e retorna uma resposta com status 500
+    console.error(err.message);
+    res.status(500).send("Erro ao obter o ocorrência");
+  }
+}
+
 // Função para criar um novo usuário
 async function createOcorrencias(req, res) {
   try {
@@ -51,6 +71,7 @@ async function updateOcorrencias(req, res) {
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
   getAllOcorrencias,
+  getOcorrenciaById,
   createOcorrencias,
   updateOcorrencias,
 };

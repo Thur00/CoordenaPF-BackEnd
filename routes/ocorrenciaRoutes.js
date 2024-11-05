@@ -13,6 +13,10 @@ const ocorrenciaController = require("../controllers/ocorrenciaController");
 // Chama o método "getocorrencias" do controller quando a rota raiz "/ocorrencias" for acessada
 router.get("/", ocorrenciaController.getAllOcorrencias);
 
+// Rota GET para obter um usuário
+// Chama o método "getocorrenciabyid" do controller quando a rota raiz "/ocorrencias" for acessada
+router.get("/:id", ocorrenciaController.getOcorrenciaById);
+
 // Rota POST para criar um novo usuário
 // Chama o método "createocorrencias" do controller ao acessar "/ocorrencias" com dados no corpo da requisição
 router.post("/", ocorrenciaController.createOcorrencias);
