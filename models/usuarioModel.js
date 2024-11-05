@@ -60,11 +60,12 @@ async function getAllUsuarios() {
 
 // Função para criar um novo usuário
 async function createUsuario(usuario) {
-  const { nome, email, senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO usuarios (Nome, Email, Senha, CPF) VALUES (@nome, @email, @senha, @cpf);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO usuarios (Nome, Cargo, Email, Senha, CPF) VALUES (@nome, @cargo, @email, @senha, @cpf);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
+    { name: "cargo", type: TYPES.NVarChar, value: cargo },
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "senha", type: TYPES.NVarChar, value: senha },
     { name: "cpf", type: TYPES.NVarChar, value: cpf },
@@ -74,12 +75,13 @@ async function createUsuario(usuario) {
 
 // Função para atualizar um usuário existente
 async function updateUsuario(id, usuario) {
-  const { nome, email, senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE usuarios SET Nome = @nome, Email = @email, Senha = @senha, CPF = @cpf WHERE Login_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE usuarios SET Nome = @nome,  Cargo = @cargo, Email = @email, Senha = @senha, CPF = @cpf WHERE Login_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
+    { name: "cargo", type: TYPES.NVarChar, value: cargo },
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "senha", type: TYPES.NVarChar, value: senha },
     { name: "cpf", type: TYPES.NVarChar, value: cpf },
