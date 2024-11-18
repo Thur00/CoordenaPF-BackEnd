@@ -42,6 +42,9 @@ const urgenciasRoutes = require("./routes/urgenciaRoutes");
 // Importando as rotas das usuarios
 const usuarioRoutes = require("./routes/usuarioRoutes");
 
+// Importando as rotas de login
+const loginRoutes = require("./routes/loginRoutes");
+
 // Importando as rotas das notificacoes
 const notificacaoRoutes = require("./routes/notificacaoRoutes");
 
@@ -71,6 +74,9 @@ app.use("/urgencias", urgenciasRoutes);
 
 // Usando as rotas do cliente com o prefixo '/usuarios'
 app.use("/usuarios", usuarioRoutes);
+
+// Usando as rotas do cliente com o prefixo '/login'
+app.use("/login", loginRoutes);
 
 // Usando as rotas do cliente com o prefixo '/notificacoes'
 app.use("/notificacoes", notificacaoRoutes);
