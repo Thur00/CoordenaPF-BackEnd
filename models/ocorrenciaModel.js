@@ -83,7 +83,7 @@ async function createOcorrencias(ocorrencias) {
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma,  Rm_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma,  RM_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
