@@ -6,6 +6,7 @@ const { Request, TYPES } = require("tedious");
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
 
+
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
   // Estabelece uma conexão com o banco de dados
@@ -54,7 +55,7 @@ async function executeQuery(query, params = []) {
 
 // Função para obter todos os usuários do banco de dados
 async function getAllNotificacao() {
-  const query = "SELECT * FROM Notificacao;"; // Define a query SQL para obter todos os registros da tabela "Users"
+  const query = "SELECT * FROM modi_Notificacao;"; // Define a query SQL para obter todos os registros da tabela "Users"
   return await executeQuery(query); // Executa a query usando a função executeQuery
 }
 
@@ -92,4 +93,5 @@ module.exports = {
   getAllNotificacao,
   createNotificacao,
   updateNotificacao,
+
 };
