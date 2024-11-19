@@ -11,7 +11,7 @@ const loginController = require("../controllers/loginController");
 
 // Rota POST para obter todos os usuários
 // Chama o método "validaLogin" do controller quando a rota raiz "/login" for acessada
-router.get("/", loginController.validaLogin);
+router.get("/:cpf/:senha", loginController.validaLogin);
 
 
 // Exporta o roteador para que ele possa ser usado na aplicação principal (app.js)
