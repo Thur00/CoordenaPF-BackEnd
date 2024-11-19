@@ -140,12 +140,22 @@ async function updateOcorrencias(id, ocorrencias) {
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
+async function updateStatus(id, status) {
+
+  const query = `UPDATE OcorrenciasRaiz SET Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
+  const params = [
+    { name: "Status", type: TYPES.Int, value: status },
+  ];
+  await executeQuery(query, params); // Executa a query com os parâmetros
+}
+
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
   getAllOcorrencias,
   getOcorrenciaById,
   createOcorrencias,
   updateOcorrencias,
+  updateStatus
 };
 
 

@@ -68,10 +68,25 @@ async function updateOcorrencias(req, res) {
   }
 }
 
+async function updateStatus(req, res) {
+  try {
+    // Chama o método do modelo para atualizar o usuário com base no ID e nos dados fornecidos
+    await OcorrenciasModel.updateStatus(req.params.id, req.body);
+
+    // Retorna uma mensagem de sucesso após a atualização
+    res.send("Status atualizada com sucesso");
+  } catch (err) {
+    // Exibe o erro no console e retorna uma resposta com status 500
+    console.error(err.message);
+    res.status(500).send("Erro ao atualizar status");
+  }
+}
+
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
   getAllOcorrencias,
   getOcorrenciaById,
   createOcorrencias,
   updateOcorrencias,
+  updateStatus
 };

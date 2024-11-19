@@ -25,6 +25,8 @@ router.post("/", ocorrenciaController.createOcorrencias);
 // Chama o método "updateocorrencias" do controller ao acessar "/ocorrencias/:id" e fornecer novos dados no corpo da requisição
 router.put("/:id", ocorrenciaController.updateOcorrencias);
 
+router.put("/status/:id", ocorrenciaController.updateStatus);
+
 
 // Exporta o roteador para que ele possa ser usado na aplicação principal (app.js)
 module.exports = router;
