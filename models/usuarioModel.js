@@ -2,9 +2,11 @@
 
 // Importa o Request e os tipos de dados (TYPES) do pacote "tedious" para criar e executar consultas SQL
 const { Request, TYPES } = require("tedious");
+const createConnection = require('../config/db')
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
+const { request } = require("express");
 
 // Função genérica para executar uma query SQL
 async function executeQuery(query, params = []) {
@@ -87,9 +89,59 @@ async function updateUsuario(id, usuario) {
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
+// Função para criar um novo usuário
+async function getByCpfSenha(usuario, callback) {
+  const { senha, cpf } = usuario; // Extrai o CPF e a Senha do objeto passado como parâmetro
+
+  const connection = createConnection();
+  connection.on('connect', (err) => {
+    if (err) return callback(err);
+
+    // Query SQL para retornar as colunas da tabela além da contagem
+    const query = `SELECT * FROM usuarios WHERE CPF = @cpf AND Senha = @senha`;
+    const request = new Request(query, (err, rowCount) => {
+      connection.close();
+      if (err) return callback(err);
+    });
+
+    let isValid = false;
+    let usuarioData = null;
+
+    request.on('row', (columns) => {
+      // Para cada linha retornada, extraímos as colunas
+      usuarioData = {};
+      columns.forEach((column) => {
+        usuarioData[column.metadata.colName] = column.value; // Armazena o valor da coluna no objeto
+      });
+
+      // Se uma linha foi retornada, a autenticação é válida
+      isValid = true;
+    });
+
+    request.on('requestCompleted', () => {
+      // Se os dados foram encontrados, retorna as informações do usuário
+      if (isValid) {
+        callback(null, { status: "VALIDO", usuario: usuarioData });
+      } else {
+        callback(null, { status: "INVALIDO" });
+      }
+    });
+
+    console.log("Callback: ", callback);
+
+    request.addParameter('CPF', TYPES.NVarChar, cpf);
+    request.addParameter('Senha', TYPES.NVarChar, senha);
+    connection.execSql(request);
+  });
+  connection.connect();
+}
+
+
+
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
   getAllUsuarios,
   createUsuario,
   updateUsuario,
+  getByCpfSenha
 };

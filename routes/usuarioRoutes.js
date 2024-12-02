@@ -21,6 +21,10 @@ router.post("/", usuarioController.createUsuario);
 // Chama o método "updateusuario" do controller ao acessar "/usuario/:id" e fornecer novos dados no corpo da requisição
 router.put("/:id", usuarioController.updateUsuario);
 
+// Rota para autenticação por email e senha
+router.post("/login", usuarioController.autenticar);
+
+
 
 // Exporta o roteador para que ele possa ser usado na aplicação principal (app.js)
 module.exports = router;
