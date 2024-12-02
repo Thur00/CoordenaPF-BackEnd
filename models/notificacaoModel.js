@@ -69,7 +69,7 @@ async function createNotificacao(Notificacao) {
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Solicitado", type: TYPES.Int, value: Solicitado }, // Define o parâmetro @name
     { name: "Data_envio", type: TYPES.Date, value: Data_envio },
-    { name: "Mensagem", type: TYPES.Date, value: Mensagem },
+    { name: "Mensagem", type: TYPES.NVarChar, value: Mensagem },
 
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
@@ -86,7 +86,7 @@ async function updateNotificacao(id, Notificacao) {
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Solicitado", type: TYPES.Int, value: Solicitado }, // Define o parâmetro @name
     { name: "Data_envio", type: TYPES.Date, value: Data_envio },
-    { name: "Mensagem", type: TYPES.Date, value: Mensagem },
+    { name: "Mensagem", type: TYPES.NVarChar, value: Mensagem },
 
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
