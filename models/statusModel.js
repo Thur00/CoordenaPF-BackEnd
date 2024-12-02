@@ -64,8 +64,8 @@ async function createStatus(Status) {
 
   const query = `INSERT INTO Status (Categoria, Icone) VALUES (@categoria, @icone);`; // Query SQL para inserir um novo registro
   const params = [
-    { name: "categoria", type: TYPES.VarChar, value: categoria }, // Define o parâmetro @name
-    { name: "icone", type: TYPES.VarChar, value: icone },
+    { name: "categoria", type: TYPES.NVarChar, value: categoria }, // Define o parâmetro @name
+    { name: "icone", type: TYPES.Int, value: icone },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
@@ -78,7 +78,7 @@ async function updateStatus(id, Status) {
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "categoria", type: TYPES.NVarChar, value: categoria }, // Define o parâmetro @categoria
-    { name: "icone", type: TYPES.NVarChar, value: icone },
+    { name: "icone", type: TYPES.Int, value: icone },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }

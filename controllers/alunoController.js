@@ -45,11 +45,11 @@ async function createAluno(req, res) {
     await alunoModel.createAluno(req.body);
 
     // Retorna um status 201 (criado com sucesso)
-    res.status(201).send("Aluno cadastrado com sucesso");
+    res.status(201).json({ message: "Aluno cadastrado com sucesso" });
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Erro ao cadastrar o aluno");
+    res.status(500).json({ message: "Erro ao cadastrar o aluno" });
   }
 }
 
