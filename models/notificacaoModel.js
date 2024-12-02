@@ -61,29 +61,33 @@ async function getAllNotificacao() {
 
 // Função para criar um novo usuário
 async function createNotificacao(Notificacao) {
-  const { Cod_ocorrencia, Criador, Solicitado, Data_envio } = Notificacao; // Extrai o nome do aspecto do objeto passado como parâmetro
+  const { Cod_ocorrencia, Criador, Solicitado, Data_envio, Mensagem } = Notificacao; // Extrai o nome do aspecto do objeto passado como parâmetro
 
-  const query = `INSERT INTO Notificacao (Cod_ocorrencia, Criador, Solicitado, Data_envio) VALUES (@Cod_ocorrencia, @Criador, @Solicitado, @Data_envio);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO Notificacao (Cod_ocorrencia, Criador, Solicitado, Data_envio, Mensagem) VALUES (@Cod_ocorrencia, @Criador, @Solicitado, @Data_envio, @Mensagem);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Cod_ocorrencia", type: TYPES.Int, value: Cod_ocorrencia }, // Define o parâmetro @name
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Solicitado", type: TYPES.Int, value: Solicitado }, // Define o parâmetro @name
     { name: "Data_envio", type: TYPES.Date, value: Data_envio },
+    { name: "Mensagem", type: TYPES.Date, value: Mensagem },
+
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
 async function updateNotificacao(id, Notificacao) {
-  const { Cod_ocorrencia, Criador, Solicitado, Data_envio } = Notificacao; // Extrai o nome do aspecto do objeto passado como parâmetro
+  const { Cod_ocorrencia, Criador, Solicitado, Data_envio, Mensagem } = Notificacao; // Extrai o nome do aspecto do objeto passado como parâmetro
 
-  const query = `UPDATE Notificacao SET Cod_ocorrencia, Criador, Solicitado, Data_envio = @Cod_ocorrencia, @Criador, @Solicitado, @Data_envio WHERE Notificacao_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE Notificacao SET Cod_ocorrencia, Criador, Solicitado, Data_envio, Mensagem = @Cod_ocorrencia, @Criador, @Solicitado, @Data_envio, @Mensagem WHERE Notificacao_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "Cod_ocorrencia", type: TYPES.Int, value: Cod_ocorrencia }, // Define o parâmetro @nome
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Solicitado", type: TYPES.Int, value: Solicitado }, // Define o parâmetro @name
     { name: "Data_envio", type: TYPES.Date, value: Data_envio },
+    { name: "Mensagem", type: TYPES.Date, value: Mensagem },
+
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
