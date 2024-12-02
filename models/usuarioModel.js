@@ -91,37 +91,51 @@ async function updateUsuario(id, usuario) {
 
 // Função para criar um novo usuário
 async function getByCpfSenha(usuario, callback) {
-  const { senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { senha, cpf } = usuario; // Extrai o CPF e a Senha do objeto passado como parâmetro
 
   const connection = createConnection();
   connection.on('connect', (err) => {
-    if (err) return callback(err)
+    if (err) return callback(err);
 
-
-    const query = `SELECT COUNT(*) as count FROM usuarios WHERE CPF = @cpf AND Senha = @senha`; // Query SQL para inserir um novo registro
+    // Query SQL para retornar as colunas da tabela além da contagem
+    const query = `SELECT * FROM usuarios WHERE CPF = @cpf AND Senha = @senha`;
     const request = new Request(query, (err, rowCount) => {
       connection.close();
-      if (err) return callback(err)
-    })
+      if (err) return callback(err);
+    });
 
     let isValid = false;
+    let usuarioData = null;
+
     request.on('row', (columns) => {
-      const count = columns[0].value;
-      isValid = count > 0;
+      // Para cada linha retornada, extraímos as colunas
+      usuarioData = {};
+      columns.forEach((column) => {
+        usuarioData[column.metadata.colName] = column.value; // Armazena o valor da coluna no objeto
+      });
+
+      // Se uma linha foi retornada, a autenticação é válida
+      isValid = true;
     });
 
     request.on('requestCompleted', () => {
-      callback(null, isValid ? "VALIDO" : "INVALIDO");
-    })
+      // Se os dados foram encontrados, retorna as informações do usuário
+      if (isValid) {
+        callback(null, { status: "VALIDO", usuario: usuarioData });
+      } else {
+        callback(null, { status: "INVALIDO" });
+      }
+    });
 
-    console.log("Callback: ",callback)
+    console.log("Callback: ", callback);
 
-    request.addParameter('CPF',TYPES.NVarChar, cpf)
-    request.addParameter('Senha',TYPES.NVarChar, senha)
-    connection.execSql(request)
-  })
-connection.connect();
+    request.addParameter('CPF', TYPES.NVarChar, cpf);
+    request.addParameter('Senha', TYPES.NVarChar, senha);
+    connection.execSql(request);
+  });
+  connection.connect();
 }
+
 
 
 // Exporta as funções para serem usadas nos controllers
