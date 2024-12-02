@@ -78,12 +78,13 @@ async function createOcorrencias(ocorrencias) {
     Turma,
     Rm_aluno,
     Responsavel,
+    Especialista,
     Descricao,
     Encaminhamento,
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma,  RM_aluno, Responsavel, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma,  RM_aluno, Responsavel, Especialista, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Especialista, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
@@ -95,6 +96,7 @@ async function createOcorrencias(ocorrencias) {
     { name: "Turma", type: TYPES.NVarChar, value: Turma },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
     { name: "Responsavel", type: TYPES.NVarChar, value: Responsavel },
+    { name: "Especialista", type: TYPES.NVarChar, value: Especialista },
     { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
     { name: "Encaminhamento", type: TYPES.Int, value: Encaminhamento },
     { name: "Status", type: TYPES.Int, value: Status },
@@ -115,12 +117,13 @@ async function updateOcorrencias(id, ocorrencias) {
     Turma,
     Rm_aluno,
     Responsavel,
+    Especialista,
     Descricao,
     Encaminhamento,
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE OcorrenciasRaiz SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE OcorrenciasRaiz SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Especialista = @Especialista, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
@@ -133,9 +136,22 @@ async function updateOcorrencias(id, ocorrencias) {
     { name: "Turma", type: TYPES.NVarChar, value: Turma },
     { name: "Rm_aluno", type: TYPES.Int, value: Rm_aluno },
     { name: "Responsavel", type: TYPES.NVarChar, value: Responsavel },
+    { name: "Especialista", type: TYPES.NVarChar, value: Especialista },
     { name: "Descricao", type: TYPES.NVarChar, value: Descricao },
     { name: "Encaminhamento", type: TYPES.Int, value: Encaminhamento },
     { name: "Status", type: TYPES.Int, value: Status },
+  ];
+  await executeQuery(query, params); // Executa a query com os parâmetros
+}
+
+async function updateStatus(id, statuss) {
+  const { status } = statuss;
+  console.log(status);
+  console.log(typeof status);
+  const query = `UPDATE OcorrenciasRaiz SET Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
+  const params = [
+    { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
+    { name: "Status", type: TYPES.Int, value: status },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
@@ -146,9 +162,8 @@ module.exports = {
   getOcorrenciaById,
   createOcorrencias,
   updateOcorrencias,
+  updateStatus,
 };
-
-
 
 // // models/userModel.js
 

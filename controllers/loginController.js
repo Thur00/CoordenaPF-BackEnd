@@ -7,7 +7,7 @@ const loginModel = require("../models/loginModel");
 async function validaLogin(req, res) {
   try {
     // Chama o método do modelo para obter o usuário com base no ID fornecido
-    const login = await loginModel.validaLogin(req.body);
+    const login = await loginModel.validaLogin(req.params);
 
     // Se o usuário não for encontrado, retorna um status 404 (não encontrado)
     if (!login) {
@@ -19,7 +19,7 @@ async function validaLogin(req, res) {
   } catch (err) {
     // Exibe o erro no console e retorna uma resposta com status 500
     console.error(err.message);
-    res.status(500).send("Não foi possivel ");
+    res.status(500).send("Não foi possivel");
   }
 }
 
