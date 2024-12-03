@@ -2,7 +2,7 @@
 
 // Importa o Request e os tipos de dados (TYPES) do pacote "tedious" para criar e executar consultas SQL
 const { Request, TYPES } = require("tedious");
-const createConnection = require('../config/db')
+const createConnection = require("../config/db");
 
 // Importa a função que conecta ao banco de dados
 const connectDatabase = require("../db/connection");
@@ -62,29 +62,35 @@ async function getAllUsuarios() {
 
 // Função para criar um novo usuário
 async function createUsuario(usuario) {
-  const { nome, cargo, email, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, cpf, senha } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO usuarios (Nome, Cargo, Email, CPF) VALUES (@nome, @cargo, @email, @cpf);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO usuarios (Nome, Cargo, Email, CPF, Senha, Autoridade) VALUES (@nome, @cargo, @email, @cpf, @senha, @autoridade);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
     { name: "cargo", type: TYPES.NVarChar, value: cargo },
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "cpf", type: TYPES.NVarChar, value: cpf },
+    { name: "senha", type: TYPES.NVarChar, value: senha },
+    { name: "autoridade", type: TYPES.NVarChar, value: autoridade },
   ];
+
+  console.log(senha)
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
 
 // Função para atualizar um usuário existente
 async function updateUsuario(id, usuario) {
-  const { nome, cargo, email, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, cpf, senha } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE usuarios SET Nome = @nome,  Cargo = @cargo, Email = @email, CPF = @cpf WHERE Login_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE usuarios SET Nome = @nome,  Cargo = @cargo, Email = @email, CPF = @cpf, Senha= @senha, Autoridade = @autoridade WHERE Login_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "nome", type: TYPES.NVarChar, value: nome }, // Define o parâmetro @name
     { name: "cargo", type: TYPES.NVarChar, value: cargo },
     { name: "email", type: TYPES.NVarChar, value: email },
     { name: "cpf", type: TYPES.NVarChar, value: cpf },
+    { name: "senha", type: TYPES.NVarChar, value: senha },
+    { name: "autoridade", type: TYPES.NVarChar, value: autoridade },
   ];
   await executeQuery(query, params); // Executa a query com os parâmetros
 }
@@ -94,40 +100,38 @@ async function getByCpfSenha(usuario, callback) {
   const { senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
   const connection = createConnection();
-  connection.on('connect', (err) => {
-    if (err) return callback(err)
-
+  connection.on("connect", (err) => {
+    if (err) return callback(err);
 
     const query = `SELECT COUNT(*) as count FROM usuarios WHERE CPF = @cpf AND Senha = @senha`; // Query SQL para inserir um novo registro
     const request = new Request(query, (err, rowCount) => {
       connection.close();
-      if (err) return callback(err)
-    })
+      if (err) return callback(err);
+    });
 
     let isValid = false;
-    request.on('row', (columns) => {
+    request.on("row", (columns) => {
       const count = columns[0].value;
       isValid = count > 0;
     });
 
-    request.on('requestCompleted', () => {
+    request.on("requestCompleted", () => {
       callback(null, isValid ? "VALIDO" : "INVALIDO");
-    })
+    });
 
-    console.log("Callback: ",callback)
+    console.log("Callback: ", callback);
 
-    request.addParameter('CPF',TYPES.NVarChar, cpf)
-    request.addParameter('Senha',TYPES.NVarChar, senha)
-    connection.execSql(request)
-  })
-connection.connect();
+    request.addParameter("CPF", TYPES.NVarChar, cpf);
+    request.addParameter("Senha", TYPES.NVarChar, senha);
+    connection.execSql(request);
+  });
+  connection.connect();
 }
-
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
   getAllUsuarios,
   createUsuario,
   updateUsuario,
-  getByCpfSenha
+  getByCpfSenha,
 };

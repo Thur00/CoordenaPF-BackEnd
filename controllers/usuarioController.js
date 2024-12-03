@@ -48,23 +48,23 @@ async function updateUsuario(req, res) {
   }
 }
 
-// Função para criar um novo usuário
-async function autenticar (req, res) {
+  // Função para criar um novo usuário
+  async function autenticar (req, res) {
 
-    // Chama o método do modelo para criar o novo usuário com os dados fornecidos
-    usuarioModel.getByCpfSenha(req.body, (err, resultado) => {
+      // Chama o método do modelo para criar o novo usuário com os dados fornecidos
+      usuarioModel.getByCpfSenha(req.body, (err, resultado) => {
 
-      if (err) {
-        // Exibe o erro no console e retorna uma resposta com usuario 500
-        return res.status(500).json({message: "Erro ao autenticar usuário"});
-        }
+        if (err) {
+          // Exibe o erro no console e retorna uma resposta com usuario 500
+          return res.status(500).json({message: "Erro ao autenticar usuário"});
+          }
 
-    // Retorna um usuario 201 (criado com sucesso)
-    return res.status(201).json({message: resultado});
+      // Retorna um usuario 201 (criado com sucesso)
+      return res.status(201).json({message: resultado});
 
-    });
-
-}
+      });
+      
+  }
 
 // Exporta as funções do controller para serem usadas nas rotas da aplicação
 module.exports = {
