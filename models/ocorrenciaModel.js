@@ -72,6 +72,7 @@ async function createOcorrencias(ocorrencias) {
     Data_ocorrencia,
     Hora,
     Iniciativa,
+    Nome_iniciativa,
     Aspecto,
     Urgencia,
     Tema,
@@ -84,12 +85,13 @@ async function createOcorrencias(ocorrencias) {
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Aspecto, Urgencia, Tema, Turma,  RM_aluno, Responsavel, Especialista, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Especialista, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
+  const query = `INSERT INTO OcorrenciasRaiz (Criador, Data_ocorrencia, Hora, Iniciativa, Nome_iniciativa, Aspecto, Urgencia, Tema, Turma,  RM_aluno, Responsavel, Especialista, Descricao, Encaminhamento, Statuss) VALUES (@Criador, @Data_ocorrencia, @Hora, @Iniciativa, @Nome_iniciativa, @Aspecto, @Urgencia, @Tema, @Turma, @Rm_aluno, @Responsavel, @Especialista, @Descricao, @Encaminhamento, @Status);`; // Query SQL para inserir um novo registro
   const params = [
     { name: "Criador", type: TYPES.Int, value: Criador },
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
     { name: "Hora", type: TYPES.NVarChar, value: Hora },
     { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
+    { name: "Nome_iniciativa", type: TYPES.NVarChar, value: Nome_iniciativa },
     { name: "Aspecto", type: TYPES.Int, value: Aspecto },
     { name: "Urgencia", type: TYPES.Int, value: Urgencia },
     { name: "Tema", type: TYPES.Int, value: Tema },
@@ -111,6 +113,7 @@ async function updateOcorrencias(id, ocorrencias) {
     Data_ocorrencia,
     Hora,
     Iniciativa,
+    Nome_iniciativa,
     Aspecto,
     Urgencia,
     Tema,
@@ -123,13 +126,14 @@ async function updateOcorrencias(id, ocorrencias) {
     Status,
   } = ocorrencias; // Extrai o categoria do Status do objeto passado como parâmetro
 
-  const query = `UPDATE OcorrenciasRaiz SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Especialista = @Especialista, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
+  const query = `UPDATE OcorrenciasRaiz SET Criador = @Criador, Data_ocorrencia = @Data_ocorrencia, Hora = @Hora, Iniciativa = @Iniciativa, Nome_iniciativa = @Nome_iniciativa, Aspecto = @Aspecto, Urgencia = @Urgencia, Tema = @Tema, Turma = @Turma, Rm_aluno = @Rm_aluno, Responsavel = @Responsavel, Especialista = @Especialista, Descricao = @Descricao, Encaminhamento = @Encaminhamento, Statuss = @Status WHERE Ocorrencia_id = @id;`; // Query SQL para atualizar o registro
   const params = [
     { name: "id", type: TYPES.Int, value: id }, // Define o parâmetro @id
     { name: "Criador", type: TYPES.Int, value: Criador }, // Define o parâmetro @name
     { name: "Data_ocorrencia", type: TYPES.Date, value: Data_ocorrencia },
     { name: "Hora", type: TYPES.NVarChar, value: Hora },
     { name: "Iniciativa", type: TYPES.NVarChar, value: Iniciativa },
+    { name: "Nome_iniciativa", type: TYPES.NVarChar, value: Nome_iniciativa },
     { name: "Aspecto", type: TYPES.Int, value: Aspecto },
     { name: "Urgencia", type: TYPES.Int, value: Urgencia },
     { name: "Tema", type: TYPES.Int, value: Tema },

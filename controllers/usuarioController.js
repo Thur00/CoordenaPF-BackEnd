@@ -60,7 +60,7 @@ async function updateUsuario(req, res) {
           }
 
       // Retorna um usuario 201 (criado com sucesso)
-      return res.status(201).json({message: resultado});
+      return res.status(201).json(resultado);
 
       });
       
