@@ -62,7 +62,7 @@ async function getAllUsuarios() {
 
 // Função para criar um novo usuário
 async function createUsuario(usuario) {
-  const { nome, cargo, email, cpf, senha } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, cpf, senha, autoridade } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
   const query = `INSERT INTO usuarios (Nome, Cargo, Email, CPF, Senha, Autoridade) VALUES (@nome, @cargo, @email, @cpf, @senha, @autoridade);`; // Query SQL para inserir um novo registro
   const params = [
@@ -80,7 +80,7 @@ async function createUsuario(usuario) {
 
 // Função para atualizar um usuário existente
 async function updateUsuario(id, usuario) {
-  const { nome, cargo, email, cpf, senha } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { nome, cargo, email, cpf, senha, autoridade } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
 
   const query = `UPDATE usuarios SET Nome = @nome,  Cargo = @cargo, Email = @email, CPF = @cpf, Senha= @senha, Autoridade = @autoridade WHERE Login_id = @id;`; // Query SQL para atualizar o registro
   const params = [
@@ -97,36 +97,52 @@ async function updateUsuario(id, usuario) {
 
 // Função para criar um novo usuário
 async function getByCpfSenha(usuario, callback) {
-  const { senha, cpf } = usuario; // Extrai o categoria do Status do objeto passado como parâmetro
+  const { senha, cpf } = usuario; // Extrai o CPF e a Senha do objeto passado como parâmetro
 
   const connection = createConnection();
-  connection.on("connect", (err) => {
+  connection.on('connect', (err) => {
     if (err) return callback(err);
 
-    const query = `SELECT COUNT(*) as count FROM usuarios WHERE CPF = @cpf AND Senha = @senha`; // Query SQL para inserir um novo registro
+    // Query SQL para retornar as colunas da tabela além da contagem
+    const query = `SELECT * FROM usuarios WHERE CPF = @cpf AND Senha = @senha`;
     const request = new Request(query, (err, rowCount) => {
       connection.close();
       if (err) return callback(err);
     });
 
     let isValid = false;
-    request.on("row", (columns) => {
-      const count = columns[0].value;
-      isValid = count > 0;
+    let usuarioData = null;
+
+    request.on('row', (columns) => {
+      // Para cada linha retornada, extraímos as colunas
+      usuarioData = {};
+      columns.forEach((column) => {
+        usuarioData[column.metadata.colName] = column.value; // Armazena o valor da coluna no objeto
+      });
+
+      // Se uma linha foi retornada, a autenticação é válida
+      isValid = true;
     });
 
-    request.on("requestCompleted", () => {
-      callback(null, isValid ? "VALIDO" : "INVALIDO");
+    request.on('requestCompleted', () => {
+      // Se os dados foram encontrados, retorna as informações do usuário
+      if (isValid) {
+        callback(null, { status: "VALIDO", usuario: usuarioData });
+      } else {
+        callback(null, { status: "INVALIDO" });
+      }
     });
 
     console.log("Callback: ", callback);
 
-    request.addParameter("CPF", TYPES.NVarChar, cpf);
-    request.addParameter("Senha", TYPES.NVarChar, senha);
+    request.addParameter('CPF', TYPES.NVarChar, cpf);
+    request.addParameter('Senha', TYPES.NVarChar, senha);
     connection.execSql(request);
   });
   connection.connect();
 }
+
+
 
 // Exporta as funções para serem usadas nos controllers
 module.exports = {
